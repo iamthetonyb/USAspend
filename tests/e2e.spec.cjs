@@ -11,7 +11,10 @@ test("desktop dashboard core UI works", async ({ page }) => {
 
   await expect(page.locator(".hdr-t h1")).toHaveText("USA Spending Watch");
   await expect(page.locator(".logo")).toHaveText("USA");
-  await expect(page.locator(".sensory-toggle")).toHaveText("SFX on");
+  await expect(page.locator(".sensory-toggle")).toHaveText("FX on");
+  await expect(page.locator(".sound-toggle")).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator(".hero-bg-video")).toHaveAttribute("poster", /hero-poster\.jpg/);
+  await expect.poll(() => page.locator(".hero-bg-video").evaluate((node) => node.getAttribute("src") || "")).toContain("hero-motion.mp4");
   await expect(page.locator('input[placeholder="Search jurisdiction..."]')).toBeVisible();
   await expect(page.locator(".maplibregl-canvas")).toBeVisible();
 
@@ -33,10 +36,23 @@ test("desktop dashboard core UI works", async ({ page }) => {
   expect(afterMotion).toBe("running");
 
   await page.locator(".sensory-toggle").click();
-  await expect(page.locator(".sensory-toggle")).toHaveText("SFX off");
+  await expect(page.locator(".sensory-toggle")).toHaveText("FX off");
   await expect(page.locator(".sensory-toggle")).toHaveAttribute("aria-pressed", "false");
+  const offMotion = await page.evaluate(() => ({
+    sparkle: getComputedStyle(document.querySelector(".sp")).animationName,
+    scrollCue: getComputedStyle(document.querySelector(".scroll-cue")).animationName,
+    mapButton: getComputedStyle(document.querySelector(".btn-map")).animationName,
+    videoSrc: document.querySelector(".hero-bg-video").getAttribute("src") || "",
+  }));
+  expect(offMotion).toEqual({ sparkle: "none", scrollCue: "none", mapButton: "none", videoSrc: "" });
   await page.locator(".sensory-toggle").click();
-  await expect(page.locator(".sensory-toggle")).toHaveText("SFX on");
+  await expect(page.locator(".sensory-toggle")).toHaveText("FX on");
+
+  await page.locator(".sound-toggle").click();
+  await expect(page.locator(".sound-toggle")).toHaveAttribute("aria-pressed", "false");
+  await page.locator(".sound-toggle").click();
+  await expect(page.locator(".sound-toggle")).toHaveAttribute("aria-pressed", "true");
+  await expect(page.evaluate(() => window.Sensory && window.Sensory.isFeedbackEnabled())).resolves.toBe(true);
 
   await page.locator('input[placeholder="Search jurisdiction..."]').fill("Clark");
   await expect(page.getByText("Clark County").first()).toBeVisible();
@@ -63,6 +79,7 @@ test("mobile HUD controls do not overlap", async ({ page }) => {
 
   await expect(page.locator(".hdr-t h1")).toHaveText("USA Spending Watch");
   await expect(page.locator(".sensory-toggle")).toBeVisible();
+  await expect(page.locator(".sound-toggle")).toBeVisible();
   await expect(page.locator('input[placeholder="Search jurisdiction..."]')).toBeVisible();
 
   const layout = await page.evaluate(() => {
@@ -84,9 +101,10 @@ test("mobile HUD controls do not overlap", async ({ page }) => {
       controls: rect(".maplibregl-ctrl-top-left"),
       kpiButton: rect(".mobile-kpi-btn"),
       sidebar: rect("#sidebar"),
-      sensory: rect(".sensory-toggle"),
+      effectControls: rect(".effect-controls"),
       feedback: rect("#feedbackButton"),
       cta: rect(".btn-map"),
+      heroVideo: rect(".hero-bg-video"),
       map: rect("#map"),
       bodyWidth: document.documentElement.clientWidth,
     };
@@ -98,9 +116,10 @@ test("mobile HUD controls do not overlap", async ({ page }) => {
   expect(layout.controls.left).toBeGreaterThanOrEqual(0);
   expect(layout.controls.right).toBeLessThanOrEqual(layout.bodyWidth);
   expect(layout.kpiButton.right).toBeLessThanOrEqual(layout.bodyWidth);
-  expect(layout.sensory.right).toBeLessThan(layout.feedback.left);
+  expect(layout.effectControls.right).toBeLessThan(layout.feedback.left);
   expect(layout.cta.width).toBeGreaterThan(330);
   expect(layout.cta.height).toBeGreaterThanOrEqual(88);
+  expect(layout.heroVideo.width).toBeGreaterThan(300);
 
   await page.locator(".mobile-kpi-btn").click();
   await expect(page.locator("#kpi")).toHaveClass(/open/);

@@ -7,17 +7,19 @@
 <title>USA Spending Watch Demo</title>
 <link rel="icon" href="data:,"/>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.23.0/dist/maplibre-gl.css" crossorigin="anonymous" integrity="sha384-uTttxo/aOKbdE5RlD/SPzSDoDmNvGlUYPjONi2MN/b7c9HPSvW07OIuyP7uL6jxK"/>
-<link rel="stylesheet" href="assets/css/styles.css?v=9"/>
+<script>(function(){try{var legacy=localStorage.getItem('usaSpendingWatch.sensory');var stored=localStorage.getItem('usaSpendingWatch.motion');var on=stored==='on'?true:stored==='off'?false:legacy==='on'?true:legacy==='off'?false:!matchMedia('(prefers-reduced-motion:reduce)').matches;document.documentElement.dataset.motion=on?'on':'off'}catch(e){document.documentElement.dataset.motion=matchMedia('(prefers-reduced-motion:reduce)').matches?'off':'on'}})()</script>
+<link rel="stylesheet" href="assets/css/styles.css?v=13"/>
 <script src="assets/js/config.js?v=1"></script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script defer src="https://unpkg.com/maplibre-gl@5.23.0/dist/maplibre-gl.js" crossorigin="anonymous" integrity="sha384-XUm39RJVRRZhhm3KBfi4/fn/dxDBFEa1wA/yRSYhlb83K5ggl6ApLqbfwcJFlK/W"></script>
 <script defer src="assets/js/map.js?v=1"></script>
-<script defer src="assets/js/sensory.js?v=1"></script>
+<script defer src="assets/js/sensory.js?v=2"></script>
 <script defer src="assets/js/app.js?v=1"></script>
 </head>
 <body>
 <noscript><style>body{display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;background:#05050a;color:#d1cfc8}</style><p>USA Spending Watch requires JavaScript.</p></noscript>
 <section class="hero" id="top">
+  <video class="hero-bg-video" muted loop playsinline preload="none" poster="assets/media/hero-poster.jpg?v=1" data-src="assets/media/hero-motion.mp4?v=1" aria-hidden="true"></video>
   <div class="hero-inner">
     <div class="hero-kicker"><span class="hero-dot"></span>FY 2026 &middot; Live Citizen Audit</div>
     <h1>Where your<br>
@@ -67,7 +69,13 @@
 </div>
 </div>
 </div>
-<button class="sensory-toggle" id="sensoryToggle" type="button" aria-pressed="true" aria-label="Toggle sound and haptic feedback">SFX on</button>
+<div class="effect-controls" aria-label="Experience controls">
+<button class="sensory-toggle" id="sensoryToggle" type="button" aria-pressed="true" aria-label="Toggle visual effects">FX on</button>
+<button class="sound-toggle" id="soundToggle" type="button" aria-pressed="true" aria-label="Toggle sound and haptic feedback">
+<svg class="sound-on-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 8c1.3 1.1 1.9 2.4 1.9 4s-.6 2.9-1.9 4"/><path d="M18.5 5.5c2.1 1.8 3.2 4 3.2 6.5s-1.1 4.7-3.2 6.5"/></svg>
+<svg class="sound-off-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="m18 9 4 4m0-4-4 4"/></svg>
+</button>
+</div>
 <button class="feedback-btn" id="feedbackButton" onclick="dashboardActions.openFeedback()">Feedback</button>
 <div class="feedback-panel" id="feedbackPanel" aria-hidden="true">
 <div class="feedback-top"><strong>Send Feedback</strong><button onclick="dashboardActions.closeFeedback()" aria-label="Close feedback">Close</button></div>

@@ -13,7 +13,8 @@ Live demo: [gov-budget.pages.dev](https://gov-budget.pages.dev) · Repo: [iamthe
 - Filter by funding source: Federal, State, Local / District, Others
 - Search and sort across jurisdictions and federal agencies
 - Drill into individual records with source links back to official data
-- Optional SFX/haptic feedback for key controls, generated in-browser with no audio files
+- Optional sound/haptic feedback for key controls, generated in-browser with no audio files
+- Compressed same-origin hero motion background with static poster fallback
 
 All displayed claims link to official source snapshots. Labels use "review", "priority", and "needs review" — not accusations of fraud or waste.
 
@@ -42,6 +43,7 @@ frontend/
   assets/js/map.js            MapLibre GL JS v5 wrapper
   assets/js/sensory.js        Optional Web Audio + Vibration API feedback
   assets/css/styles.css       All styles
+  assets/media/               Hero video + poster assets
   data/bootstrap.json         Pre-generated jurisdiction + GeoJSON data
   _headers                    Cloudflare Pages security headers (CSP, HSTS, etc.)
 
