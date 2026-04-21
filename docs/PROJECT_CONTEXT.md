@@ -1,5 +1,5 @@
 # USA Spending Watch — Project Context
-> Auto-generated 2026-04-21T07:43:06.341Z by `pnpm context:compile`
+> Auto-generated 2026-04-21T08:11:17.988Z by `pnpm context:compile`
 > Load this file for full project state in any AI session.
 
 ## Stack

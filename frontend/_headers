@@ -1,3 +1,14 @@
+# Data files: always revalidate — new deploys must be visible immediately
+/data/*.json
+  Cache-Control: public, max-age=0, must-revalidate
+
+# JS/CSS: long cache (cache-busted by ?v= param in HTML)
+/assets/js/*.js
+  Cache-Control: public, max-age=31536000, immutable
+/assets/css/*.css
+  Cache-Control: public, max-age=31536000, immutable
+
+# Global security headers (applies to everything including above, headers merge)
 /*
   Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
   X-Content-Type-Options: nosniff
