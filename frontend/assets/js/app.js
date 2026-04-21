@@ -1674,22 +1674,11 @@
     const budget = (Number(s.totalBudget) || 0) / 1e9;
     const priority = Number(s.totalPriorityPackages) || 0;
     const jurisdictions = Number(dashboardData.regions?.length) || 0;
-
-    const io = new IntersectionObserver((entries) => {
-      if (!entries[0].isIntersecting) return;
-      io.disconnect();
-      countUp(document.getElementById("hv-budget"), budget, "$", "B", 1600);
-      countUp(document.getElementById("hv-priority"), priority, "", "", 1600);
-      countUp(document.getElementById("hv-jurisdictions"), jurisdictions, "", "", 1400);
-    }, { threshold: 0.3 });
-
-    const hero = document.querySelector(".hero");
-    if (hero) io.observe(hero);
-    else {
-      countUp(document.getElementById("hv-budget"), budget, "$", "B", 1600);
-      countUp(document.getElementById("hv-priority"), priority, "", "", 1600);
-      countUp(document.getElementById("hv-jurisdictions"), jurisdictions, "", "", 1400);
-    }
+    setTimeout(() => {
+      countUp(document.getElementById("hv-budget"), budget, "$", "B", 1800);
+      countUp(document.getElementById("hv-priority"), priority, "", "", 1800);
+      countUp(document.getElementById("hv-jurisdictions"), jurisdictions, "", "", 1600);
+    }, 180);
   }
 
   function initMapResizeObserver() {

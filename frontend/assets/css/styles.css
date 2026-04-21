@@ -371,20 +371,21 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;o
 /* Map-style primary CTA with wiggle + ticker */
 .btn-map{
   background:
-    repeating-linear-gradient(0deg, transparent, transparent 7px, rgba(74,222,128,.07) 7px, rgba(74,222,128,.07) 8px),
-    repeating-linear-gradient(90deg, transparent, transparent 7px, rgba(74,222,128,.07) 7px, rgba(74,222,128,.07) 8px),
-    linear-gradient(135deg,rgba(4,8,5,.98),rgba(5,14,8,.97));
+    repeating-linear-gradient(0deg, transparent, transparent 6px, rgba(74,222,128,.18) 6px, rgba(74,222,128,.18) 7px),
+    repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(74,222,128,.18) 6px, rgba(74,222,128,.18) 7px),
+    linear-gradient(135deg,rgba(3,10,5,.99),rgba(4,14,6,.98));
   color:#4ade80;border:1px solid rgba(74,222,128,.42);
   box-shadow:0 0 18px rgba(74,222,128,.1),0 14px 32px -10px rgba(74,222,128,.2),inset 0 1px 0 rgba(74,222,128,.12);
   position:relative;overflow:hidden;
   animation:map-wiggle 3.5s ease-in-out infinite;
 }
 .btn-map::after{
-  content:'$23.4\2191 $18.2\2193 $45.1\2191 $12.8\2193 $67.3\2191 $31.2\2193 $89.7\2191 $14.5\2193 ';
-  position:absolute;bottom:2px;left:0;width:200%;
-  font:600 6px 'JetBrains Mono',monospace;color:rgba(74,222,128,.2);
-  white-space:nowrap;letter-spacing:1.2px;
-  animation:ticker-run 10s linear infinite;pointer-events:none;
+  content:'$23.4\2191  $18.2\2193  $45.1\2191  $12.8\2193  $67.3\2191  $31.2\2193  $89.7\2191  $14.5\2193  $52.6\2191  $9.3\2193  ';
+  position:absolute;bottom:3px;left:0;width:220%;
+  font:700 7.5px 'JetBrains Mono',monospace;color:rgba(74,222,128,.48);
+  white-space:nowrap;letter-spacing:.8px;
+  animation:ticker-run 14s linear infinite;pointer-events:none;
+  text-shadow:0 0 8px rgba(74,222,128,.3);
 }
 .btn-map:hover,.btn-map:focus-visible{
   border-color:rgba(74,222,128,.72);outline:none;
