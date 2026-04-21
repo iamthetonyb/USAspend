@@ -14,6 +14,7 @@
     "check:rust": "cargo fmt --check --all && cargo clippy --workspace --all-targets --all-features -- -D warnings && cargo test --workspace",
     "validate:data": "cargo run -q -p spending-validate -- frontend/data/bootstrap.json",
     "check:backend": "pnpm --dir backend audit --prod",
+    "context:compile": "node tools/compile-context.mjs",
     "check": "pnpm check:frontend && pnpm check:rust && pnpm validate:data && pnpm check:backend"
   }
 }

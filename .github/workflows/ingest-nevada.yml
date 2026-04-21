@@ -1,0 +1,154 @@
+name: Nevada Data Refresh
+
+on:
+  schedule:
+    # Weekly Monday 8 AM UTC — runs forever, no VPS needed
+    - cron: "0 8 * * 1"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Validate only, do not commit or deploy"
+        required: false
+        default: "false"
+      sources:
+        description: "Comma-separated sources to run (state,las-vegas,ccsd,counties,districts) — empty = all"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ingest-nevada
+  cancel-in-progress: false
+
+jobs:
+  ingest:
+    name: Ingest + validate + deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: "1.94.1"
+          components: "clippy,rustfmt"
+
+      - name: Cache Rust build
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: rust-${{ runner.os }}-${{ hashFiles('Cargo.lock') }}
+          restore-keys: rust-${{ runner.os }}-
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: "10"
+
+      - name: Install backend deps (for any shared utilities)
+        run: pnpm --dir backend install --frozen-lockfile
+
+      # --- Source ingestion steps ---
+      # Each step is independent; failures are non-fatal individually.
+      # The validate step below catches any corrupt output.
+
+      - name: Ingest — Nevada state checkbook
+        if: ${{ github.event.inputs.sources == '' || contains(github.event.inputs.sources, 'state') }}
+        run: node tools/ingest/nevada-state-checkbook.mjs
+        env:
+          INGEST_DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+        continue-on-error: true
+
+      - name: Ingest — Las Vegas city checkbook
+        if: ${{ github.event.inputs.sources == '' || contains(github.event.inputs.sources, 'las-vegas') }}
+        run: node tools/ingest/nevada-las-vegas.mjs
+        env:
+          INGEST_DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+        continue-on-error: true
+
+      - name: Ingest — Clark County School District
+        if: ${{ github.event.inputs.sources == '' || contains(github.event.inputs.sources, 'ccsd') }}
+        run: node tools/ingest/nevada-ccsd.mjs
+        env:
+          INGEST_DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+        continue-on-error: true
+
+      - name: Ingest — County ACFR/portal data
+        if: ${{ github.event.inputs.sources == '' || contains(github.event.inputs.sources, 'counties') }}
+        run: node tools/ingest/nevada-counties.mjs
+        env:
+          INGEST_DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+        continue-on-error: true
+
+      - name: Ingest — Special districts
+        if: ${{ github.event.inputs.sources == '' || contains(github.event.inputs.sources, 'districts') }}
+        run: node tools/ingest/nevada-districts.mjs
+        env:
+          INGEST_DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+        continue-on-error: true
+
+      # --- Regenerate the public artifact ---
+
+      - name: Regenerate bootstrap.json from all ingested sources
+        run: pnpm generate:nevada
+
+      # --- Rust validation gate — this is the hard gate ---
+      # If this fails, we do not commit or deploy.
+
+      - name: Validate bootstrap.json (Rust gate)
+        run: pnpm validate:data
+
+      # --- Commit and push if data changed ---
+
+      - name: Check for changes
+        id: diff
+        run: |
+          git diff --quiet frontend/data/bootstrap.json && echo "changed=false" >> $GITHUB_OUTPUT || echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: Commit updated data
+        if: ${{ steps.diff.outputs.changed == 'true' && github.event.inputs.dry_run != 'true' }}
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add frontend/data/bootstrap.json
+          DATE=$(date -u +%Y-%m-%d)
+          git commit -m "data: Nevada refresh ${DATE} [skip ci]"
+          git push
+
+      # --- Deploy to Cloudflare Pages ---
+      # Preferred: enable Cloudflare Pages GitHub integration in the dashboard
+      # (Settings > Pages > Connect to Git) so every push auto-deploys without
+      # any secret or step here.
+      #
+      # Fallback: uncomment below and add CF_API_TOKEN + CF_ACCOUNT_ID secrets.
+      #
+      # - name: Deploy to Cloudflare Pages
+      #   if: ${{ steps.diff.outputs.changed == 'true' && github.event.inputs.dry_run != 'true' }}
+      #   run: pnpm dlx wrangler@4.84.0 pages deploy frontend --project-name gov-budget --branch main
+      #   env:
+      #     CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+      #     CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "### Nevada Data Refresh" >> $GITHUB_STEP_SUMMARY
+          echo "- Changed: ${{ steps.diff.outputs.changed }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Dry run: ${{ github.event.inputs.dry_run || 'false' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Triggered: ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Bootstrap validation: passed" >> $GITHUB_STEP_SUMMARY

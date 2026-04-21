@@ -216,6 +216,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--b0);color:var(-
 .modal-filters input:focus{border-color:var(--sage)}
 .modal-filters select{background:var(--b2);border:1px solid var(--bd);border-radius:7px;padding:9px 10px;font-size:10.5px;color:var(--t1);font-family:inherit;outline:none;cursor:pointer}
 .modal-cnt{font-size:10.5px;color:var(--t3);margin-bottom:10px}
+.coverage-note{background:rgba(100,160,255,.07);border:1px solid rgba(100,160,255,.2);border-radius:8px;padding:10px 13px;font-size:10.5px;color:var(--t2);line-height:1.5;margin-bottom:12px}
+.coverage-note-icon{color:#7ab4ff;margin-right:4px}
 .modal-summary-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:14px}
 .mini-stat{background:var(--b2);border:1px solid var(--bd);border-radius:8px;padding:10px 12px}
 .mini-stat span{display:block;font-size:8.5px;color:var(--t3);text-transform:uppercase;letter-spacing:.6px;font-weight:600;margin-bottom:3px}

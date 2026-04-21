@@ -1099,6 +1099,7 @@
         formatNumber(province.maxRiskScore)
       )}</strong></div>` +
       `</div>` +
+      (province.coverageNote ? `<div class="coverage-note"><span class="coverage-note-icon">ⓘ</span> <strong>Data coverage:</strong> ${escapeHtml(province.coverageNote)}</div>` : "") +
       `<div class="modal-filters">` +
       `<input type="text" placeholder="Search record, owner, or office..." value="${escapeAttr(
         state.modal.search
@@ -1677,6 +1678,15 @@
       );
       regionsByKey = new Map(dashboardData.regions.map((region) => [region.regionKey, region]));
       provincesByKey = new Map(dashboardData.provinceView.provinces.map((province) => [province.provinceKey, province]));
+      const generatedAt = dashboardData?.sourceMeta?.generatedAt;
+      if (generatedAt) {
+        const el = document.querySelector(".ll");
+        if (el) {
+          const d = new Date(generatedAt);
+          const label = d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+          el.title = `Data generated ${label}`;
+        }
+      }
       renderKpis();
       renderLegend();
       initMap();

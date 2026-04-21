@@ -431,6 +431,7 @@ async function main() {
     },
     severityCounts: provinceSeverity,
     dominantOwnerType: "central",
+    coverageNote: "FY 2026 data covers federal awards only (USAspending.gov). Nevada state, county, city, and district sources are in progress. Nevada OpenBudget excludes: debt service, interfund transfers, bond proceeds, and some capital projects per the official exclusions page at budget.nv.gov/OpenBudget.",
   };
 
   const bootstrap = {

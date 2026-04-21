@@ -1,55 +1,53 @@
 # Nevada Data Runbook
 
-Current public demo is Nevada-first and static.
+Quick reference for working with Nevada dashboard data. See `docs/data-sources/` for per-source details and `docs/ingestion-pipeline.md` for automation.
 
-## What ships now
+## Current Data (FY 2026 Demo)
 
-- Normal map basemap: OpenStreetMap raster tiles through MapLibre.
-- Boundaries: U.S. Census TIGERweb Current MapServer.
-- Nevada counties: TIGERweb Counties layer.
-- Nevada congressional districts: TIGERweb 119th Congressional Districts layer.
-- Federal spending map amounts: USAspending FY2026 `spending_by_category/county` and `spending_by_category/district`.
-- Federal award examples: USAspending FY2026 `spending_by_award` for top Nevada contracts and assistance awards.
-- Feedback: GitHub Issues prefilled by the static frontend, no database or server needed.
+| Layer | Source | Status |
+|-------|--------|--------|
+| Federal awards by county | USAspending.gov API | ✅ Live |
+| Federal awards by congressional district | USAspending.gov API | ✅ Live |
+| County/district boundaries | Census TIGERweb | ✅ Live |
+| State checkbook | Nevada Open Books (OpenGov) | 🔴 Pending — configure report ID |
+| State budget (w/ exclusions) | Nevada OpenBudget | 🔴 Pending |
+| Las Vegas city checkbook | Las Vegas OpenGov | 🔴 Pending — configure report ID |
+| CCSD school budget | CCSD Open Book (OpenGov) | 🔴 Pending |
+| Clark County | Socrata (data.clarkcountynv.gov) | 🔴 Pending — confirm dataset ID |
+| Washoe County | PDF ACFR | 🔴 Pending |
+| Carson City | PDF ACFR | 🔴 Pending |
+| RTC Southern Nevada | Socrata (data.rtcsnv.com) | 🟡 Verify portal |
+| WCSD school budget | OpenGov or PDF | 🟡 Verify source |
+| Water/utility districts | PDF ACFRs | 🔴 Pending |
 
-Rebuild:
+## Rebuild Demo Data
 
 ```bash
-node tools/generate-nevada-demo.mjs > frontend/data/bootstrap.json
+pnpm generate:nevada       # regenerates frontend/data/bootstrap.json from APIs
+pnpm validate:data         # Rust validator — hard gate before any commit
+pnpm check                 # full gate (JS + Rust + validate + backend audit)
+pnpm context:compile       # refresh docs/PROJECT_CONTEXT.md (AI-loadable state snapshot)
 ```
 
-Validate:
+In any Claude Code session, type `/audit` to run the full gate interactively, or `/add-source` to scaffold a new connector.
 
-```bash
-node --check frontend/assets/js/app.js
-node --check frontend/assets/js/map.js
-node --check tools/generate-nevada-demo.mjs
-node -e "JSON.parse(require('fs').readFileSync('frontend/data/bootstrap.json','utf8'))"
-```
+## Accuracy Rules
 
-## Accuracy rules
+- "Review amount" = official source amount selected for priority review, not an allegation
+- "Review tier" = amount-volume signal (Low / Medium / High / Extreme)
+- Do not call a row waste, fraud, corruption, or abuse unless an official enforcement or audit source confirms it
+- County and district totals can overlap with award samples — do not add them together
+- OpenBudget exclusions must be displayed in UI before claiming full state spend coverage
+- Label Transparent Nevada (transparentnevada.com) as "independent source" — it is not an official state portal
 
-- Review amount means official source amount selected for review.
-- Review tier is amount-volume only.
-- Do not call a row waste, fraud, corruption, or abuse unless an official enforcement or audit source says that.
-- County and district aggregates can overlap with award examples. Do not add them together.
-- Keep raw source snapshots private; publish generated source-linked artifacts.
+## Source Priority for Next Connectors
 
-## Next Nevada connectors
+1. Nevada state checkbook (openbooks.nv.gov) — configure OpenGov report ID
+2. Las Vegas city checkbook (lasvegasnevada.opengov.com) — configure OpenGov report ID
+3. Clark County Socrata — verify dataset ID at data.clarkcountynv.gov
+4. CCSD Open Book — confirm OpenGov subdomain
+5. RTC Southern Nevada — verify Socrata at data.rtcsnv.com
+6. Washoe County + WCSD — parallel work with Reno/northern Nevada expansion
 
-1. State: Nevada Open Finance Portal / Checkbook for budget, checkbook, payroll, and pension disbursements.
-2. Exclusions: Nevada OpenBudget exclusion page must be represented in the UI before claiming full state spend coverage.
-3. City: Las Vegas Open Checkbook and Open Budget portal.
-4. School: Clark County School District Open Book.
-5. County: Clark County, Washoe County, Carson City, and county budget/ACFR PDFs where no API exists.
-6. Districts: official wards/council districts, school districts, utility/water/transit authorities, judicial districts, legislative districts.
-
-## Public hosting
-
-Use Cloudflare Pages for the demo. Keep it static until search requires an indexed API.
-
-For public testing:
-
-- Leave `robots.txt` and `X-Robots-Tag` noindex during early feedback.
-- Add Cloudflare WAF Managed Challenge to `/` and `/data/*` if bot traffic starts.
-- Upgrade map tiles before heavy traffic; `tile.openstreetmap.org` is acceptable for low-volume testing but has no SLA and is not for heavy production.
+See `docs/data-sources/` for detailed per-source runbooks.
+See `docs/ingestion-pipeline.md` for automation and GitHub Actions setup.
