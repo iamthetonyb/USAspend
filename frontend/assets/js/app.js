@@ -1567,6 +1567,16 @@
     openPackageDetail(sourceId);
   }
 
+  function showHowItWorks() {
+    const modal = document.getElementById("hiwModal");
+    if (modal) { modal.classList.add("open"); document.body.style.overflow = "hidden"; }
+  }
+
+  function closeHowItWorks() {
+    const modal = document.getElementById("hiwModal");
+    if (modal) { modal.classList.remove("open"); document.body.style.overflow = ""; }
+  }
+
   function closeKpis() {
     document.getElementById("kpi")?.classList.remove("open");
     document.getElementById("kpiBackdrop")?.classList.remove("open");
@@ -1696,6 +1706,7 @@
         closeKpis();
         closeFeedback();
         closeRegionModal();
+        closeHowItWorks();
       }
     });
 
@@ -1741,6 +1752,7 @@
   window.dashboardActions = {
     changeModalPage,
     closeFeedback,
+    closeHowItWorks,
     closeKpis,
     closeRegionModal,
     handlePackageRowKeydown,
@@ -1756,6 +1768,7 @@
     setSearch,
     setSort,
     setTab,
+    showHowItWorks,
     submitFeedback,
     toggleKpis,
     toggleLegend,

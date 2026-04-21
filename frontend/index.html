@@ -37,9 +37,9 @@
     <div class="hero-cta">
       <a href="#app" class="btn btn-map">
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M21 10.5c0 7.5-9 13-9 13s-9-5.5-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10.5" r="3"/></svg>
-        $$ Explore the Map
+        <em>$$</em> Explore the Map
       </a>
-      <a href="#app" class="btn btn-sec">How it works <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></a>
+      <button type="button" class="btn btn-sec" onclick="dashboardActions.showHowItWorks()">How it works <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></button>
     </div>
   </div>
   <div class="hero-fade-btm"></div>
@@ -76,6 +76,55 @@
 <div id="turnstileContainer"></div>
 <button class="feedback-submit" onclick="dashboardActions.submitFeedback()">Open GitHub Issue</button>
 <p>Uses GitHub Issues so feedback stays free, public, and auditable.</p>
+</div>
+<div class="modal-overlay hiw-overlay" id="hiwModal" onclick="dashboardActions.closeHowItWorks()">
+<div class="modal hiw-modal" onclick="event.stopPropagation()">
+<div class="modal-top">
+<div class="modal-top-row">
+<div><h2>How it works</h2><div class="msub">USA Spending Watch &middot; Open-source citizen audit</div></div>
+<div><button class="modal-close" onclick="dashboardActions.closeHowItWorks()">&#10005; Close</button></div>
+</div>
+</div>
+<div class="modal-body hiw-body">
+<div class="hiw-section">
+<div class="hiw-icon">&#128269;</div>
+<h3>What is this?</h3>
+<p>An open-source tool that surfaces government spending data by county, agency, and source type. Every figure links to an official record &mdash; USAspending.gov, state checkbooks, county portals.</p>
+</div>
+<div class="hiw-section">
+<div class="hiw-icon">&#128506;</div>
+<h3>Using the map</h3>
+<ul>
+<li>Click any county to open its spending records</li>
+<li>Use filter chips (Federal / State / Local / District) to narrow by source</li>
+<li>Switch to <strong>State</strong> view for Nevada-level aggregates</li>
+<li>Search the sidebar to find a specific jurisdiction or agency</li>
+</ul>
+</div>
+<div class="hiw-section">
+<div class="hiw-icon">&#128200;</div>
+<h3>What do the tiers mean?</h3>
+<p><strong>Low / Medium / High / Extreme Volume</strong> are amount-volume signals &mdash; not fraud findings. They indicate how large a record is relative to others. High volume = worth reviewing. It is not an allegation of wrongdoing.</p>
+</div>
+<div class="hiw-section">
+<div class="hiw-icon">&#128196;</div>
+<h3>Data sources</h3>
+<ul>
+<li><strong>Federal:</strong> USAspending.gov FY 2026 awards &amp; obligations</li>
+<li><strong>Nevada State:</strong> OpenGov state checkbook (~$960M)</li>
+<li><strong>Clark County School District:</strong> OpenGov portal</li>
+<li><strong>Counties:</strong> Nevada county ACFR financial reports</li>
+<li><strong>Geography:</strong> TIGERweb Census boundaries</li>
+</ul>
+</div>
+<div class="hiw-section">
+<div class="hiw-icon">&#128279;</div>
+<h3>100% open source</h3>
+<p>Pipeline, validator, and frontend are public. Data refreshes weekly via GitHub Actions. See something wrong? Use the Feedback button &mdash; it opens a GitHub Issue directly.</p>
+</div>
+</div>
+<div class="modal-footer">Data is sourced from official government records. Review tiers are amount-volume signals, not allegations of waste or fraud.</div>
+</div>
 </div>
 <div class="modal-overlay" id="rupModal"><div class="modal"><div class="modal-top" id="modalTop"></div><div class="modal-body" id="modalBody"></div><div class="modal-footer">Demo uses official federal source snapshots plus simplified Census boundaries. Review tiers are amount-volume cues, not allegations of waste.</div></div></div>
 </body>
