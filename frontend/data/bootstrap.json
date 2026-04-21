@@ -3645,7 +3645,276 @@
           "high": 3,
           "absurd": 2
         },
-        "dominantOwnerType": "central"
+        "dominantOwnerType": "central",
+        "stateCheckbook": {
+          "source": "checkbook.nv.gov",
+          "apiBase": "https://nevada-prod.spending.socrata.com",
+          "fiscalYear": "2025",
+          "totalAmount": 30960795067.85,
+          "totalTransactions": 2492663,
+          "agencyCount": 15,
+          "lastUpdated": "2026-04-21T07:41:27.020Z",
+          "topAgencies": [
+            {
+              "name": "Health Care Financing & Policy",
+              "amount": 8967456157
+            },
+            {
+              "name": "Department OF Education",
+              "amount": 6908925193
+            },
+            {
+              "name": "College Savings Trust",
+              "amount": 3406861931
+            },
+            {
+              "name": "Department OF Transportation",
+              "amount": 1438560048
+            },
+            {
+              "name": "NV Higher Education",
+              "amount": 1338415712
+            },
+            {
+              "name": "Public Employees Benefits",
+              "amount": 840574657
+            },
+            {
+              "name": "DIV OF Welfare&Supportive Svcs",
+              "amount": 617016613
+            },
+            {
+              "name": "Public AND Behavioral Health",
+              "amount": 586762710
+            },
+            {
+              "name": "Aging AND Disability Services",
+              "amount": 567954121
+            },
+            {
+              "name": "State Public Works Division",
+              "amount": 500873466
+            },
+            {
+              "name": "Department OF Corrections",
+              "amount": 481802598
+            },
+            {
+              "name": "Governor'S Office",
+              "amount": 450833015
+            },
+            {
+              "name": "Treasurer'S Office",
+              "amount": 422912471
+            },
+            {
+              "name": "Child AND Family Division",
+              "amount": 371266699
+            },
+            {
+              "name": "Board OF Examiners",
+              "amount": 317131127
+            }
+          ],
+          "packages": [
+            {
+              "id": "nv-state-agency-1",
+              "packageName": "Health Care Financing & Policy",
+              "owner": "State of Nevada",
+              "office": "Nevada State Controller's Office",
+              "budget": 8967456157,
+              "totalPotentialWaste": 26902368,
+              "riskScore": 2,
+              "severity": "High",
+              "isPriority": true,
+              "reviewReason": "State agency expenditure — priority review for contracts >$1M",
+              "sourceUrl": "https://nevada-prod.spending.socrata.com/#!/year/2025/explore/0/level_1"
+            },
+            {
+              "id": "nv-state-agency-2",
+              "packageName": "Department OF Education",
+              "owner": "State of Nevada",
+              "office": "Nevada State Controller's Office",
+              "budget": 6908925193,
+              "totalPotentialWaste": 20726776,
+              "riskScore": 2,
+              "severity": "High",
+              "isPriority": true,
+              "reviewReason": "State agency expenditure — priority review for contracts >$1M",
+              "sourceUrl": "https://nevada-prod.spending.socrata.com/#!/year/2025/explore/0/level_1"
+            },
+            {
+              "id": "nv-state-agency-3",
+              "packageName": "College Savings Trust",
+              "owner": "State of Nevada",
+              "office": "Nevada State Controller's Office",
+              "budget": 3406861931,
+              "totalPotentialWaste": 10220586,
+              "riskScore": 2,
+              "severity": "High",
+              "isPriority": true,
+              "reviewReason": "State agency expenditure — priority review for contracts >$1M",
+              "sourceUrl": "https://nevada-prod.spending.socrata.com/#!/year/2025/explore/0/level_1"
+            },
+            {
+              "id": "nv-state-agency-4",
+              "packageName": "Department OF Transportation",
+              "owner": "State of Nevada",
+              "office": "Nevada State Controller's Office",
+              "budget": 1438560048,
+              "totalPotentialWaste": 4315680,
+              "riskScore": 2,
+              "severity": "High",
+              "isPriority": true,
+              "reviewReason": "State agency expenditure — priority review for contracts >$1M",
+              "sourceUrl": "https://nevada-prod.spending.socrata.com/#!/year/2025/explore/0/level_1"
+            },
+            {
+              "id": "nv-state-agency-5",
+              "packageName": "NV Higher Education",
+              "owner": "State of Nevada",
+              "office": "Nevada State Controller's Office",
+              "budget": 1338415712,
+              "totalPotentialWaste": 4015247,
+              "riskScore": 2,
+              "severity": "High",
+              "isPriority": true,
+              "reviewReason": "State agency expenditure — priority review for contracts >$1M",
+              "sourceUrl": "https://nevada-prod.spending.socrata.com/#!/year/2025/explore/0/level_1"
+            },
+            {
+              "id": "nv-state-agency-6",
+              "packageName": "Public Employees Benefits",
+              "owner": "State of Nevada",
+              "office": "Nevada State Controller's Office",
+              "budget": 840574657,
+              "totalPotentialWaste": 2521724,
+              "riskScore": 2,
+              "severity": "Medium",
+              "isPriority": true,
+              "reviewReason": "State agency expenditure — priority review for contracts >$1M",
+              "sourceUrl": "https://nevada-prod.spending.socrata.com/#!/year/2025/explore/0/level_1"
+            },
+            {
+              "id": "nv-state-agency-7",
+              "packageName": "DIV OF Welfare&Supportive Svcs",
+              "owner": "State of Nevada",
+              "office": "Nevada State Controller's Office",
+              "budget": 617016613,
+              "totalPotentialWaste": 1851050,
+              "riskScore": 2,
+              "severity": "Medium",
+              "isPriority": true,
+              "reviewReason": "State agency expenditure — priority review for contracts >$1M",
+              "sourceUrl": "https://nevada-prod.spending.socrata.com/#!/year/2025/explore/0/level_1"
+            },
+            {
+              "id": "nv-state-agency-8",
+              "packageName": "Public AND Behavioral Health",
+              "owner": "State of Nevada",
+              "office": "Nevada State Controller's Office",
+              "budget": 586762710,
+              "totalPotentialWaste": 1760288,
+              "riskScore": 2,
+              "severity": "Medium",
+              "isPriority": true,
+              "reviewReason": "State agency expenditure — priority review for contracts >$1M",
+              "sourceUrl": "https://nevada-prod.spending.socrata.com/#!/year/2025/explore/0/level_1"
+            },
+            {
+              "id": "nv-state-agency-9",
+              "packageName": "Aging AND Disability Services",
+              "owner": "State of Nevada",
+              "office": "Nevada State Controller's Office",
+              "budget": 567954121,
+              "totalPotentialWaste": 1703862,
+              "riskScore": 2,
+              "severity": "Medium",
+              "isPriority": true,
+              "reviewReason": "State agency expenditure — priority review for contracts >$1M",
+              "sourceUrl": "https://nevada-prod.spending.socrata.com/#!/year/2025/explore/0/level_1"
+            },
+            {
+              "id": "nv-state-agency-10",
+              "packageName": "State Public Works Division",
+              "owner": "State of Nevada",
+              "office": "Nevada State Controller's Office",
+              "budget": 500873466,
+              "totalPotentialWaste": 1502620,
+              "riskScore": 2,
+              "severity": "Medium",
+              "isPriority": true,
+              "reviewReason": "State agency expenditure — priority review for contracts >$1M",
+              "sourceUrl": "https://nevada-prod.spending.socrata.com/#!/year/2025/explore/0/level_1"
+            },
+            {
+              "id": "nv-state-agency-11",
+              "packageName": "Department OF Corrections",
+              "owner": "State of Nevada",
+              "office": "Nevada State Controller's Office",
+              "budget": 481802598,
+              "totalPotentialWaste": 1445408,
+              "riskScore": 2,
+              "severity": "Medium",
+              "isPriority": false,
+              "reviewReason": "State agency expenditure — priority review for contracts >$1M",
+              "sourceUrl": "https://nevada-prod.spending.socrata.com/#!/year/2025/explore/0/level_1"
+            },
+            {
+              "id": "nv-state-agency-12",
+              "packageName": "Governor'S Office",
+              "owner": "State of Nevada",
+              "office": "Nevada State Controller's Office",
+              "budget": 450833015,
+              "totalPotentialWaste": 1352499,
+              "riskScore": 2,
+              "severity": "Medium",
+              "isPriority": false,
+              "reviewReason": "State agency expenditure — priority review for contracts >$1M",
+              "sourceUrl": "https://nevada-prod.spending.socrata.com/#!/year/2025/explore/0/level_1"
+            },
+            {
+              "id": "nv-state-agency-13",
+              "packageName": "Treasurer'S Office",
+              "owner": "State of Nevada",
+              "office": "Nevada State Controller's Office",
+              "budget": 422912471,
+              "totalPotentialWaste": 1268737,
+              "riskScore": 2,
+              "severity": "Medium",
+              "isPriority": false,
+              "reviewReason": "State agency expenditure — priority review for contracts >$1M",
+              "sourceUrl": "https://nevada-prod.spending.socrata.com/#!/year/2025/explore/0/level_1"
+            },
+            {
+              "id": "nv-state-agency-14",
+              "packageName": "Child AND Family Division",
+              "owner": "State of Nevada",
+              "office": "Nevada State Controller's Office",
+              "budget": 371266699,
+              "totalPotentialWaste": 1113800,
+              "riskScore": 2,
+              "severity": "Medium",
+              "isPriority": false,
+              "reviewReason": "State agency expenditure — priority review for contracts >$1M",
+              "sourceUrl": "https://nevada-prod.spending.socrata.com/#!/year/2025/explore/0/level_1"
+            },
+            {
+              "id": "nv-state-agency-15",
+              "packageName": "Board OF Examiners",
+              "owner": "State of Nevada",
+              "office": "Nevada State Controller's Office",
+              "budget": 317131127,
+              "totalPotentialWaste": 951393,
+              "riskScore": 2,
+              "severity": "Medium",
+              "isPriority": false,
+              "reviewReason": "State agency expenditure — priority review for contracts >$1M",
+              "sourceUrl": "https://nevada-prod.spending.socrata.com/#!/year/2025/explore/0/level_1"
+            }
+          ]
+        },
+        "coverageNote": "FY 2025 includes Nevada state checkbook ($31.0B, 15 agencies) from checkbook.nv.gov. Federal awards from USAspending.gov. County, city, and district sources are in progress."
       }
     ]
   },

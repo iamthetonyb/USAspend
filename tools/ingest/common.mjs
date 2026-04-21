@@ -160,6 +160,94 @@ export function tier(amt) {
   return "low";
 }
 
+// ── Portal discovery ──────────────────────────────────────────────────────────
+// Probe any government spending portal URL and return platform type + API config.
+// Supports: Socrata (data.X.gov / X.data.socrata.com), OpenGov, Tyler OpenFinance,
+//           and the Nevada checkbook pattern.
+//
+// Usage: const info = await discoverPortal("https://checkbook.nv.gov");
+// Returns: { platform, apiBase, datasets, note }
+
+export async function discoverPortal(portalUrl) {
+  const origin = new URL(portalUrl).origin;
+  const result = { platform: "unknown", apiBase: origin, datasets: [], note: "" };
+  let html = "";
+  try {
+    const r = await fetch(origin + "/", { signal: AbortSignal.timeout(15_000) });
+    html = await r.text();
+  } catch (e) {
+    result.note = `fetch failed: ${e.message}`;
+    return result;
+  }
+
+  // 1. Detect Tyler OpenFinance FIRST (uses Socrata internally, would false-positive below)
+  const appDataUrl2 = `${origin}/api/data_summary/finance_apps.json`;
+  try {
+    const apps2 = await fetchJson(appDataUrl2);
+    const entries2 = Object.entries(apps2);
+    if (entries2.length > 0) {
+      result.platform = "tyler-openfinance";
+      result.datasets = entries2.map(([url, meta]) => ({
+        id: url,
+        name: meta.app_type,
+        totalAmount: meta.total_amount || meta.opex_total_amount,
+        years: meta.total_years || meta.opex_total_years,
+        rows: meta.total_rows || meta.opex_total_rows,
+      }));
+      result.note = `Tyler OpenFinance — ${entries2.length} sub-portals (${entries2.map(([,m])=>m.app_type).join(", ")})`;
+      const spendingEntry2 = entries2.find(([,m]) => m.app_type === "spending");
+      if (spendingEntry2) result.spendingBase = spendingEntry2[0].replace(/\/$/, "").replace("http://", "https://");
+      return result;
+    }
+  } catch {}
+
+  // 2. Detect Socrata (standard open data portals)
+  if (/socrata/i.test(html) || /data\.socrata\.com/i.test(html)) {
+    // Try catalog API
+    try {
+      const cat = await fetchJson(`${origin}/api/catalog/v1?limit=20`);
+      result.platform = "socrata";
+      result.datasets = (cat.results || []).map(r => ({
+        id: r.resource?.id,
+        name: r.resource?.name,
+        type: r.resource?.type,
+      })).filter(d => d.id);
+      result.apiBase = origin;
+      result.note = `Socrata — ${cat.resultSetSize || "?"} total datasets`;
+    } catch {
+      result.platform = "socrata-unverified";
+      result.note = "Socrata detected in HTML but catalog API unavailable";
+    }
+    return result;
+  }
+
+  // 3. Detect OpenGov (opengov.com subdomains)
+  if (/opengov\.com/i.test(html)) {
+    result.platform = "opengov";
+    const reportIds = [...html.matchAll(/\/reports?\/(\d+)/g)].map(m => m[1]);
+    result.datasets = [...new Set(reportIds)].map(id => ({ id, name: `report-${id}` }));
+    result.note = `OpenGov — ${result.datasets.length} report IDs found in HTML`;
+    return result;
+  }
+
+  // 4. Detect Socrata-powered but different domain (e.g. data.cityofX.gov)
+  const socrataHosts = [...html.matchAll(/https?:\/\/([a-z0-9.-]+\.(?:socrata\.com|data\.gov))/gi)]
+    .map(m => m[1]);
+  if (socrataHosts.length > 0) {
+    result.platform = "socrata-external";
+    result.note = `References external Socrata hosts: ${[...new Set(socrataHosts)].join(", ")}`;
+    result.apiBase = "https://" + socrataHosts[0];
+  }
+
+  // 5. Sniff for any JSON API endpoints referenced in scripts
+  const apiPaths = [...new Set([...html.matchAll(/["'](\/api\/[^"'?]+\.(?:json|csv))/g)].map(m => m[1]))];
+  if (apiPaths.length > 0) {
+    result.note += ` | API paths found: ${apiPaths.slice(0, 5).join(", ")}`;
+  }
+
+  return result;
+}
+
 // ── Source attribution helpers ────────────────────────────────────────────────
 
 export function sourceRecord(url, { name, fiscalYear = FISCAL_YEAR, retrievedAt = new Date().toISOString() } = {}) {

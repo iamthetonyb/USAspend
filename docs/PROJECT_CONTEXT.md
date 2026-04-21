@@ -1,5 +1,5 @@
 # USA Spending Watch — Project Context
-> Auto-generated 2026-04-21T07:12:04.938Z by `pnpm context:compile`
+> Auto-generated 2026-04-21T07:43:06.341Z by `pnpm context:compile`
 > Load this file for full project state in any AI session.
 
 ## Stack
@@ -55,12 +55,12 @@
   [nevada-las-vegas.mjs] const LV_BUDGET_REPORT_ID = "TODO_lv_budget_report_id";
   [nevada-las-vegas.mjs] if (LV_CHECKBOOK_REPORT_ID === "TODO_lv_checkbook_report_id") {
   [nevada-las-vegas.mjs] console.warn("  SKIP: Las Vegas OpenGov report ID not configured.");
-  [nevada-state-checkbook.mjs] * TODO before first live run:
-  [nevada-state-checkbook.mjs] // TODO: confirm these IDs — they change when reports are republished
-  [nevada-state-checkbook.mjs] const CHECKBOOK_REPORT_ID = "TODO_checkbook_report_id";
-  [nevada-state-checkbook.mjs] const BUDGET_REPORT_ID = "TODO_budget_report_id";
-  [nevada-state-checkbook.mjs] if (CHECKBOOK_REPORT_ID === "TODO_checkbook_report_id") {
-  [nevada-state-checkbook.mjs] console.warn("  SKIP: OpenGov report ID not configured. See docs/data-sources/nevada-state.md.");
+  [nevada-state-checkbook.mjs] * API: nevada-prod.spending.socrata.com (public, no key required)
+  [nevada-state-checkbook.mjs] *   GET /api/historic_spending.json → monthly spend by year (all years)
+  [nevada-state-checkbook.mjs] const BASE = "https://nevada-prod.spending.socrata.com";
+  [nevada-state-checkbook.mjs] const historic = await fetchJson(`${BASE}/api/historic_spending.json`);
+  [nevada-state-checkbook.mjs] source: "nevada-prod.spending.socrata.com",
+  [nevada-state-checkbook.mjs] sourceUrl: `https://nevada-prod.spending.socrata.com/#!/year/${API_YEAR}/explore/0/level_1`,
 
 ## Key Scripts
 ```bash
