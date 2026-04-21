@@ -568,7 +568,7 @@ fn is_approved_source_id(source_id: &str) -> bool {
         || host == "tigerweb.geo.census.gov"
         || host.ends_with(".census.gov")
         // Any official US government domain
-        || host.ends_with(".gov")
+        || has_tld(&host, "gov")
         // State/local open-data portals (Socrata, OpenGov) used by NV and other states
         || host.ends_with(".socrata.com")
         || host.ends_with(".opengov.com")
@@ -582,6 +582,12 @@ fn has_official_host(url: &str, domain: &str) -> bool {
     };
 
     host == domain || host.ends_with(&format!(".{domain}"))
+}
+
+fn has_tld(host: &str, tld: &str) -> bool {
+    host.rsplit('.')
+        .next()
+        .is_some_and(|part| part.eq_ignore_ascii_case(tld))
 }
 
 fn https_host(url: &str) -> Option<String> {

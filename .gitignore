@@ -5,6 +5,7 @@ target/
 # Local runtime data (SQLite)
 backend/data/
 backend/dataset/
+data/raw/
 .wrangler/
 
 # Secrets — never commit real credentials

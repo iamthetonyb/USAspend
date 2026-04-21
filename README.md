@@ -2,7 +2,7 @@
 
 Independent public spending dashboard for federal, state, county, city, district, and authority layers. Current demo data is Nevada-first and powered by official USAspending and Census source slices; the shell is built to grow nationwide.
 
-Live demo: [gov-budget.pages.dev](https://gov-budget.pages.dev) · Future domain: usaspending.us
+Live demo: [gov-budget.pages.dev](https://gov-budget.pages.dev) · Repo: [iamthetonyb/USAspend](https://github.com/iamthetonyb/USAspend) · Future domain: usaspending.us
 
 ---
 

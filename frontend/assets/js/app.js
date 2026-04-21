@@ -1656,7 +1656,7 @@
       note,
     ].join("\n");
     const url =
-      "https://github.com/iamthetonyb/nemesis/issues/new?" +
+      "https://github.com/iamthetonyb/USAspend/issues/new?" +
       new URLSearchParams({ title, body }).toString();
     window._turnstileToken = null;
     window.open(url, "_blank", "noopener,noreferrer");
