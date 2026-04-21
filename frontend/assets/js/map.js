@@ -322,5 +322,6 @@ window.AuditMap = (() => {
     renderMarkers(styledGeo);
   }
 
-  return { render, refresh, closePopup: clearHover };
+  function resize() { map?.resize(); }
+  return { render, refresh, closePopup: clearHover, resize };
 })();

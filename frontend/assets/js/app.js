@@ -1653,6 +1653,54 @@
     closeFeedback();
   }
 
+  function countUp(el, target, prefix, suffix, duration) {
+    if (!el) return;
+    const start = performance.now();
+    const isFloat = target % 1 !== 0;
+    const step = (now) => {
+      const t = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - t, 3);
+      const val = target * ease;
+      el.textContent = prefix + (isFloat ? val.toFixed(1) : Math.round(val).toLocaleString("en-US")) + suffix;
+      if (t < 1) requestAnimationFrame(step);
+      else el.textContent = prefix + (isFloat ? target.toFixed(1) : target.toLocaleString("en-US")) + suffix;
+    };
+    requestAnimationFrame(step);
+  }
+
+  function initHeroStats() {
+    if (!dashboardData) return;
+    const s = dashboardData.summary;
+    const budget = (Number(s.totalBudget) || 0) / 1e9;
+    const priority = Number(s.totalPriorityPackages) || 0;
+    const jurisdictions = Number(dashboardData.regions?.length) || 0;
+
+    const io = new IntersectionObserver((entries) => {
+      if (!entries[0].isIntersecting) return;
+      io.disconnect();
+      countUp(document.getElementById("hv-budget"), budget, "$", "B", 1600);
+      countUp(document.getElementById("hv-priority"), priority, "", "", 1600);
+      countUp(document.getElementById("hv-jurisdictions"), jurisdictions, "", "", 1400);
+    }, { threshold: 0.3 });
+
+    const hero = document.querySelector(".hero");
+    if (hero) io.observe(hero);
+    else {
+      countUp(document.getElementById("hv-budget"), budget, "$", "B", 1600);
+      countUp(document.getElementById("hv-priority"), priority, "", "", 1600);
+      countUp(document.getElementById("hv-jurisdictions"), jurisdictions, "", "", 1400);
+    }
+  }
+
+  function initMapResizeObserver() {
+    const appSection = document.getElementById("app");
+    if (!appSection || !window.IntersectionObserver) return;
+    const io = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) AuditMap.resize();
+    }, { threshold: 0.1 });
+    io.observe(appSection);
+  }
+
   function bindEvents() {
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape") {
@@ -1667,6 +1715,8 @@
         closeRegionModal();
       }
     });
+
+    initMapResizeObserver();
   }
 
   async function bootstrap() {
@@ -1688,6 +1738,7 @@
         }
       }
       renderKpis();
+      initHeroStats();
       renderLegend();
       initMap();
       renderFilterChips();

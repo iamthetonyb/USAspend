@@ -7,7 +7,7 @@
 <title>USA Spending Watch Demo</title>
 <link rel="icon" href="data:,"/>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.23.0/dist/maplibre-gl.css" crossorigin="anonymous" integrity="sha384-uTttxo/aOKbdE5RlD/SPzSDoDmNvGlUYPjONi2MN/b7c9HPSvW07OIuyP7uL6jxK"/>
-<link rel="stylesheet" href="assets/css/styles.css?v=5"/>
+<link rel="stylesheet" href="assets/css/styles.css?v=6"/>
 <script src="assets/js/config.js"></script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script defer src="https://unpkg.com/maplibre-gl@5.23.0/dist/maplibre-gl.js" crossorigin="anonymous" integrity="sha384-XUm39RJVRRZhhm3KBfi4/fn/dxDBFEa1wA/yRSYhlb83K5ggl6ApLqbfwcJFlK/W"></script>
@@ -16,6 +16,36 @@
 </head>
 <body>
 <noscript><style>body{display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;background:#05050a;color:#d1cfc8}</style><p>USA Spending Watch requires JavaScript.</p></noscript>
+<section class="hero" id="top">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+  <div class="hero-inner">
+    <div class="hero-kicker"><span class="hero-dot"></span>FY 2026 &middot; Live Citizen Audit</div>
+    <h1>Where your<br>
+      <span class="money-wrap">
+        <span class="sp s1">&#10022;</span><span class="sp s2">&#10022;</span><span class="sp s3">&#10022;</span><span class="money">tax $</span>
+      </span> <em>actually</em> go.
+    </h1>
+    <p class="hero-sub">The open-source spending microscope. County by county, agency by agency &mdash; see every federal, state, + local dollar in motion. Built for citizens, journalists &amp; watchdogs.</p>
+    <div class="hero-stats">
+      <div class="hs-cell"><div class="hs-val" id="hv-budget">$&mdash;</div><div class="hs-lab">Budget Reviewed</div></div>
+      <div class="hs-cell"><div class="hs-val" id="hv-priority">&mdash;</div><div class="hs-lab">Priority Records</div></div>
+      <div class="hs-cell"><div class="hs-val" id="hv-jurisdictions">&mdash;</div><div class="hs-lab">Jurisdictions</div></div>
+      <div class="hs-cell"><div class="hs-val" id="hv-open">100%</div><div class="hs-lab">Open Data</div></div>
+    </div>
+    <div class="hero-cta">
+      <a href="#app" class="btn btn-map">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M21 10.5c0 7.5-9 13-9 13s-9-5.5-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10.5" r="3"/></svg>
+        Explore the Map
+      </a>
+      <a href="#app" class="btn btn-sec">How it works <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></a>
+    </div>
+  </div>
+  <div class="hero-fade-btm"></div>
+  <a href="#app" class="scroll-cue" aria-label="Scroll to explore">Scroll to explore <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14m0 0-6-6m6 6 6-6"/></svg></a>
+</section>
+<div class="app-section" id="app">
 <div class="hdr">
 <div class="hdr-l"><div class="logo">USA</div><div class="hdr-t"><h1>USA Spending Watch</h1><span>County-first source review &middot; federal, state, county, city, district, authority layers</span></div></div>
 <div class="hdr-r"><div class="ll"><span class="ldot"></span> DEMO</div><div class="yr">FY 2026</div><button class="mobile-kpi-btn" onclick="dashboardActions.toggleKpis()">KPI</button></div>
@@ -35,6 +65,7 @@
 <div class="sb-handle" onclick="dashboardActions.toggleSidebar()"></div>
 <div class="sbh"><div class="sbt" id="tabs"></div></div>
 <div class="sbc" id="sbc"></div>
+</div>
 </div>
 </div>
 <button class="feedback-btn" id="feedbackButton" onclick="dashboardActions.openFeedback()">Feedback</button>
