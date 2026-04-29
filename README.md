@@ -107,10 +107,14 @@ python3 -m http.server 8080
 ```bash
 pnpm generate:nevada   # regenerate frontend/data/bootstrap.json
 pnpm validate:data     # Rust validator — verifies source URLs, GeoJSON, key integrity
+pnpm check:freshness   # stale-data guard for generatedAt + live source payloads
+pnpm discover:sources  # probe pending source portals for dataset/report IDs
 pnpm sitemap           # regenerate frontend/sitemap.xml from the route table
 pnpm manifest          # regenerate frontend/data/manifest.json SHA-256 hashes
-pnpm check             # full gate: JS + Rust (fmt/clippy/test) + data + backend audit
+pnpm check             # full gate: JS + Rust + data freshness + manifest + backend audit
 ```
+
+Scheduled refresh is GitHub Actions only: Tue-Sat daily light refresh for federal + state data, Monday weekly full refresh, and monthly source discovery. Details: [docs/source-refresh-policy.md](docs/source-refresh-policy.md).
 
 ## Browser QA
 

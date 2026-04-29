@@ -2,8 +2,13 @@ name: Nevada Data Refresh
 
 on:
   schedule:
-    # Weekly Monday 8 AM UTC — runs forever, no VPS needed
-    - cron: "0 8 * * 1"
+    # Daily light refresh after USAspending's nightly pipeline window.
+    # Runs federal baseline + Nevada state checkbook only; cheap and current.
+    - cron: "17 10 * * 2-6"
+    # Weekly full refresh across all configured connectors.
+    - cron: "41 10 * * 1"
+    # Monthly discovery watch for pending portals/dataset IDs.
+    - cron: "23 11 2 * *"
   workflow_dispatch:
     inputs:
       dry_run:
@@ -11,7 +16,7 @@ on:
         required: false
         default: "false"
       sources:
-        description: "Comma-separated sources to run (state,las-vegas,ccsd,counties,districts) — empty = all"
+        description: "Comma-separated sources (state,las-vegas,ccsd,counties,districts), discovery, or empty = all"
         required: false
         default: ""
 
@@ -66,11 +71,57 @@ jobs:
       - name: Audit backend prod deps
         run: pnpm --dir backend audit --prod --audit-level high
 
+      - name: Plan refresh profile
+        id: plan
+        run: |
+          SCHEDULE="${{ github.event.schedule }}"
+          INPUT_SOURCES="${{ github.event.inputs.sources || '' }}"
+          INPUT_DRY_RUN="${{ github.event.inputs.dry_run || 'false' }}"
+
+          PROFILE="manual"
+          SOURCES="${INPUT_SOURCES:-all}"
+
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            case "$SCHEDULE" in
+              "17 10 * * 2-6")
+                PROFILE="daily-light"
+                SOURCES="state"
+                ;;
+              "41 10 * * 1")
+                PROFILE="weekly-full"
+                SOURCES="all"
+                ;;
+              "23 11 2 * *")
+                PROFILE="monthly-discovery"
+                SOURCES="discovery"
+                ;;
+              *)
+                PROFILE="scheduled-full"
+                SOURCES="all"
+                ;;
+            esac
+          elif [ "$INPUT_SOURCES" = "discovery" ]; then
+            PROFILE="manual-discovery"
+            SOURCES="discovery"
+          fi
+
+          echo "SOURCE_PROFILE=$PROFILE" >> "$GITHUB_ENV"
+          echo "REFRESH_SOURCES=$SOURCES" >> "$GITHUB_ENV"
+          echo "DRY_RUN=$INPUT_DRY_RUN" >> "$GITHUB_ENV"
+          echo "profile=$PROFILE" >> "$GITHUB_OUTPUT"
+          echo "sources=$SOURCES" >> "$GITHUB_OUTPUT"
+          echo "dry_run=$INPUT_DRY_RUN" >> "$GITHUB_OUTPUT"
+
+          echo "Profile: $PROFILE"
+          echo "Sources: $SOURCES"
+          echo "Dry run: $INPUT_DRY_RUN"
+
       # --- Step 1: Regenerate federal baseline from USAspending + TIGERweb ---
       # This always runs first — creates the authoritative base bootstrap.json.
       # Ingest steps below then augment it with additional state/local sources.
 
       - name: Generate federal baseline (USAspending + TIGERweb)
+        if: ${{ env.REFRESH_SOURCES != 'discovery' }}
         run: pnpm generate:nevada
 
       # --- Step 2: Augment with state / local sources ---
@@ -78,64 +129,84 @@ jobs:
       # Failures are non-fatal; the validate step below is the hard gate.
 
       - name: Ingest — Nevada state checkbook
-        if: ${{ github.event.inputs.sources == '' || contains(github.event.inputs.sources, 'state') }}
+        if: ${{ env.REFRESH_SOURCES != 'discovery' && (env.REFRESH_SOURCES == 'all' || contains(env.REFRESH_SOURCES, 'state')) }}
         run: node tools/ingest/nevada-state-checkbook.mjs
         env:
-          INGEST_DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
-        continue-on-error: true
+          INGEST_DRY_RUN: ${{ env.DRY_RUN }}
 
       - name: Ingest — Las Vegas city checkbook
-        if: ${{ github.event.inputs.sources == '' || contains(github.event.inputs.sources, 'las-vegas') }}
+        if: ${{ env.REFRESH_SOURCES != 'discovery' && (env.REFRESH_SOURCES == 'all' || contains(env.REFRESH_SOURCES, 'las-vegas')) }}
         run: node tools/ingest/nevada-las-vegas.mjs
         env:
-          INGEST_DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+          INGEST_DRY_RUN: ${{ env.DRY_RUN }}
         continue-on-error: true
 
       - name: Ingest — Clark County School District
-        if: ${{ github.event.inputs.sources == '' || contains(github.event.inputs.sources, 'ccsd') }}
+        if: ${{ env.REFRESH_SOURCES != 'discovery' && (env.REFRESH_SOURCES == 'all' || contains(env.REFRESH_SOURCES, 'ccsd')) }}
         run: node tools/ingest/nevada-ccsd.mjs
         env:
-          INGEST_DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+          INGEST_DRY_RUN: ${{ env.DRY_RUN }}
         continue-on-error: true
 
       - name: Ingest — County ACFR/portal data
-        if: ${{ github.event.inputs.sources == '' || contains(github.event.inputs.sources, 'counties') }}
+        if: ${{ env.REFRESH_SOURCES != 'discovery' && (env.REFRESH_SOURCES == 'all' || contains(env.REFRESH_SOURCES, 'counties')) }}
         run: node tools/ingest/nevada-counties.mjs
         env:
-          INGEST_DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+          INGEST_DRY_RUN: ${{ env.DRY_RUN }}
         continue-on-error: true
 
       - name: Ingest — Special districts
-        if: ${{ github.event.inputs.sources == '' || contains(github.event.inputs.sources, 'districts') }}
+        if: ${{ env.REFRESH_SOURCES != 'discovery' && (env.REFRESH_SOURCES == 'all' || contains(env.REFRESH_SOURCES, 'districts')) }}
         run: node tools/ingest/nevada-districts.mjs
         env:
-          INGEST_DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+          INGEST_DRY_RUN: ${{ env.DRY_RUN }}
         continue-on-error: true
+
+      - name: Discover source portals
+        if: ${{ env.REFRESH_SOURCES == 'discovery' }}
+        run: pnpm discover:sources
+
+      - name: Upload source discovery report
+        if: ${{ env.REFRESH_SOURCES == 'discovery' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: source-discovery-report
+          path: docs/source-discovery-report.md
+          if-no-files-found: error
 
       # --- Rust validation gate — this is the hard gate ---
       # If this fails, we do not commit or deploy.
 
       - name: Validate bootstrap.json (Rust gate)
+        if: ${{ env.REFRESH_SOURCES != 'discovery' }}
         run: pnpm validate:data
 
+      - name: Check data freshness
+        if: ${{ env.REFRESH_SOURCES != 'discovery' }}
+        run: pnpm check:freshness
+
       - name: Generate sitemap
+        if: ${{ env.REFRESH_SOURCES != 'discovery' }}
         run: pnpm sitemap
 
       - name: Generate public artifact manifest
+        if: ${{ env.REFRESH_SOURCES != 'discovery' }}
         run: pnpm manifest
 
       - name: Verify public artifact manifest
+        if: ${{ env.REFRESH_SOURCES != 'discovery' }}
         run: cargo run -q -p spending-validate -- frontend/data/bootstrap.json frontend/data/manifest.json
 
       # --- Commit and push if data changed ---
 
       - name: Check for changes
+        if: ${{ env.REFRESH_SOURCES != 'discovery' }}
         id: diff
         run: |
           git diff --quiet frontend/data/bootstrap.json frontend/data/manifest.json frontend/sitemap.xml && echo "changed=false" >> $GITHUB_OUTPUT || echo "changed=true" >> $GITHUB_OUTPUT
 
       - name: Commit updated data
-        if: ${{ steps.diff.outputs.changed == 'true' && github.event.inputs.dry_run != 'true' }}
+        if: ${{ env.REFRESH_SOURCES != 'discovery' && steps.diff.outputs.changed == 'true' && env.DRY_RUN != 'true' }}
         run: |
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
@@ -153,7 +224,7 @@ jobs:
       #
       # - name: Deploy to Cloudflare Pages
       #   if: ${{ steps.diff.outputs.changed == 'true' && github.event.inputs.dry_run != 'true' }}
-      #   run: pnpm dlx wrangler@4.84.1 pages deploy frontend --project-name gov-budget --branch main
+      #   run: pnpm dlx wrangler@4.86.0 pages deploy frontend --project-name gov-budget --branch main
       #   env:
       #     CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
       #     CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
@@ -161,14 +232,16 @@ jobs:
       - name: Summary
         if: always()
         env:
-          SOURCES_INPUT: ${{ github.event.inputs.sources || 'all' }}
-          DRY_RUN_INPUT: ${{ github.event.inputs.dry_run || 'false' }}
+          SOURCES_INPUT: ${{ steps.plan.outputs.sources || 'unknown' }}
+          PROFILE_INPUT: ${{ steps.plan.outputs.profile || 'unknown' }}
+          DRY_RUN_INPUT: ${{ steps.plan.outputs.dry_run || 'false' }}
         run: |
           echo "### Nevada Data Refresh — $(date -u +%Y-%m-%d)" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "| Field | Value |" >> $GITHUB_STEP_SUMMARY
           echo "|-------|-------|" >> $GITHUB_STEP_SUMMARY
           echo "| Triggered | ${{ github.event_name }} |" >> $GITHUB_STEP_SUMMARY
+          printf '| Profile | %s |\n' "$PROFILE_INPUT" >> "$GITHUB_STEP_SUMMARY"
           printf '| Dry run | %s |\n' "$DRY_RUN_INPUT" >> "$GITHUB_STEP_SUMMARY"
           echo "| bootstrap.json changed | ${{ steps.diff.outputs.changed || 'unknown' }} |" >> $GITHUB_STEP_SUMMARY
           printf '| Sources filter | %s |\n' "$SOURCES_INPUT" >> "$GITHUB_STEP_SUMMARY"

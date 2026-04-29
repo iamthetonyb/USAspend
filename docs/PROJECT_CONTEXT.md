@@ -1,27 +1,27 @@
 # USA Spending Watch — Project Context
-> Auto-generated 2026-04-21T08:11:17.988Z by `pnpm context:compile`
+> Auto-generated 2026-04-29T00:13:42.641Z by `pnpm context:compile`
 > Load this file for full project state in any AI session.
 
 ## Stack
 - Frontend: plain HTML/CSS/JS → Cloudflare Pages
 - Data plane: Rust validator (`crates/spending-validate/`)
 - Ingestion: Node.js ESM scripts (`tools/ingest/*.mjs`)
-- Automation: GitHub Actions weekly cron (`.github/workflows/ingest-nevada.yml`)
-- Bootstrap data: `frontend/data/bootstrap.json` (last generated: 2026-04-21T00:36:39.326Z)
+- Automation: GitHub Actions daily light / weekly full / monthly discovery cron (`.github/workflows/ingest-nevada.yml`)
+- Bootstrap data: `frontend/data/bootstrap.json` (last generated: 2026-04-29T00:06:02.684Z)
 
 ## Data Source Status (13 total)
 
-### Live (3)
+### Live (4)
 - ✅ **Federal awards by county** — USAspending.gov API
 - ✅ **Federal awards by congressional district** — USAspending.gov API
 - ✅ **County/district boundaries** — Census TIGERweb
+- ✅ **State checkbook** — Nevada Open Books (checkbook.nv.gov Socrata)
 
 ### Needs Verification (2)
 - 🟡 **RTC Southern Nevada** — Socrata (data.rtcsnv.com)
 - 🟡 **WCSD school budget** — OpenGov or PDF
 
-### Pending (8)
-- 🔴 **State checkbook** — Nevada Open Books (OpenGov)
+### Pending (7)
 - 🔴 **State budget (w/ exclusions)** — Nevada OpenBudget
 - 🔴 **Las Vegas city checkbook** — Las Vegas OpenGov
 - 🔴 **CCSD school budget** — CCSD Open Book (OpenGov)
@@ -66,7 +66,9 @@
 ```bash
 pnpm generate:nevada      # regenerate bootstrap.json from APIs
 pnpm validate:data        # Rust hard gate
-pnpm check                # full lint + Rust + validate + backend audit
+pnpm check:freshness      # data-age and live-source guard
+pnpm discover:sources     # probe pending source portals
+pnpm check                # full lint + Rust + freshness + manifest + backend audit
 pnpm context:compile      # regenerate this file
 pnpm deploy:pages         # deploy to Cloudflare Pages
 ```
@@ -114,7 +116,7 @@ pnpm deploy:pages         # deploy to Cloudflare Pages
 - `tools/generate-nevada-demo.mjs` — main data assembly script
 - `tools/ingest/common.mjs` — shared fetch/Socrata/OpenGov utilities
 - `crates/spending-validate/` — Rust validation gate
-- `.github/workflows/ingest-nevada.yml` — weekly automation
+- `.github/workflows/ingest-nevada.yml` — scheduled ingestion + source discovery
 
 ---
 *Regenerate anytime: `pnpm context:compile`*

@@ -100,7 +100,7 @@ const out = `# USA Spending Watch — Project Context
 - Frontend: plain HTML/CSS/JS → Cloudflare Pages
 - Data plane: Rust validator (\`crates/spending-validate/\`)
 - Ingestion: Node.js ESM scripts (\`tools/ingest/*.mjs\`)
-- Automation: GitHub Actions weekly cron (\`.github/workflows/ingest-nevada.yml\`)
+- Automation: GitHub Actions daily light / weekly full / monthly discovery cron (\`.github/workflows/ingest-nevada.yml\`)
 - Bootstrap data: \`frontend/data/bootstrap.json\` (last generated: ${generatedAt})
 
 ## Data Source Status (${statusRows.length} total)
@@ -121,7 +121,9 @@ ${allTodos.length > 0 ? allTodos.join("\n") : "- none found"}
 \`\`\`bash
 pnpm generate:nevada      # regenerate bootstrap.json from APIs
 pnpm validate:data        # Rust hard gate
-pnpm check                # full lint + Rust + validate + backend audit
+pnpm check:freshness      # data-age and live-source guard
+pnpm discover:sources     # probe pending source portals
+pnpm check                # full lint + Rust + freshness + manifest + backend audit
 pnpm context:compile      # regenerate this file
 pnpm deploy:pages         # deploy to Cloudflare Pages
 \`\`\`
@@ -165,7 +167,7 @@ ${dataSourceDocs.map((f) => `- \`${f.replace(ROOT + "/", "")}\``).join("\n")}
 - \`tools/generate-nevada-demo.mjs\` — main data assembly script
 - \`tools/ingest/common.mjs\` — shared fetch/Socrata/OpenGov utilities
 - \`crates/spending-validate/\` — Rust validation gate
-- \`.github/workflows/ingest-nevada.yml\` — weekly automation
+- \`.github/workflows/ingest-nevada.yml\` — scheduled ingestion + source discovery
 
 ---
 *Regenerate anytime: \`pnpm context:compile\`*

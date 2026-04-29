@@ -25,9 +25,18 @@ Quick reference for working with Nevada dashboard data. See `docs/data-sources/`
 ```bash
 pnpm generate:nevada       # regenerates frontend/data/bootstrap.json from APIs
 pnpm validate:data         # Rust validator — hard gate before any commit
-pnpm check                 # full gate (JS + Rust + validate + backend audit)
+pnpm check:freshness       # confirms generatedAt + live source payloads are current
+pnpm discover:sources      # probes pending portals for dataset/report IDs
+pnpm check                 # full gate (JS + Rust + freshness + manifest + backend audit)
 pnpm context:compile       # refresh docs/PROJECT_CONTEXT.md (AI-loadable state snapshot)
 ```
+
+Automation cadence:
+- Tue-Sat daily: federal baseline + Nevada state checkbook.
+- Monday weekly: all configured connectors.
+- Monthly: source portal discovery for pending connectors.
+
+See `docs/source-refresh-policy.md`.
 
 In any Claude Code session, type `/audit` to run the full gate interactively, or `/add-source` to scaffold a new connector.
 

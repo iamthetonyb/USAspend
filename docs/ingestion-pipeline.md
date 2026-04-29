@@ -19,18 +19,28 @@ Running ingest before generate would overwrite the augmented data.
 ## Automated Schedule
 
 **Workflow:** `.github/workflows/ingest-nevada.yml`  
-**Trigger:** Weekly Monday 8 AM UTC (`0 8 * * 1`) + manual dispatch  
 **Runtime:** GitHub Actions (Ubuntu), free for public repos  
+
+| Cadence | UTC cron | Profile | Sources |
+|---|---:|---|---|
+| Tue-Sat daily | `17 10 * * 2-6` | `daily-light` | Federal baseline + Nevada state checkbook |
+| Monday weekly | `41 10 * * 1` | `weekly-full` | All configured connectors |
+| Monthly | `23 11 2 * *` | `monthly-discovery` | Known source portal discovery |
+| Manual | Workflow dispatch | `manual` | Selected source input or all |
 
 The workflow:
 1. Generates `bootstrap.json` from federal sources (USAspending + TIGERweb)
-2. Runs each augmentation script (failures are non-fatal individually)
-3. Runs the Rust validator — **hard gate**: if validation fails, nothing commits
-4. Generates and verifies `frontend/data/manifest.json`
-5. Commits + pushes only if bootstrap.json or manifest.json changed
-6. Cloudflare Pages auto-deploys on push (enable GitHub integration in CF dashboard)
+2. Runs selected augmentation scripts
+3. Treats live sources (federal + state checkbook) as hard gates
+4. Lets pending/not-yet-configured sources soft-fail until connector IDs are verified
+5. Runs the Rust validator and freshness check — **hard gate**: if validation fails, nothing commits
+6. Generates and verifies `frontend/data/manifest.json`
+7. Commits + pushes only if bootstrap.json, sitemap.xml, or manifest.json changed
+8. Cloudflare Pages auto-deploys on push (enable GitHub integration in CF dashboard)
 
 **Result:** Data stays fresh forever with no VPS, no cron daemon, no manual work.
+
+See `docs/source-refresh-policy.md` for the full cadence and freshness rules.
 
 ---
 
@@ -50,6 +60,12 @@ The workflow:
 # Full refresh: federal baseline + state checkbook (all live sources)
 pnpm ingest:nevada
 
+# Check committed data age and required source coverage
+pnpm check:freshness
+
+# Probe pending source portals for changed APIs/dataset IDs
+pnpm discover:sources
+
 # Federal baseline only (USAspending + TIGERweb)
 pnpm generate:nevada
 
@@ -65,7 +81,7 @@ pnpm validate:data
 # Regenerate public artifact hash manifest
 pnpm manifest
 
-# Full gate (JS syntax + Rust + validate + backend audit)
+# Full gate (JS syntax + Rust + freshness + manifest + backend audit)
 pnpm check
 ```
 
@@ -75,7 +91,7 @@ pnpm check
 
 Run a specific subset of sources from GitHub Actions:
 1. GitHub → Actions → Nevada Data Refresh → Run workflow
-2. Set `sources` input: `state` | `las-vegas` | `ccsd` | `counties` | `districts` | (empty = all)
+2. Set `sources` input: `state` | `las-vegas` | `ccsd` | `counties` | `districts` | `discovery` | (empty = all)
 3. Set `dry_run: true` to validate without committing
 
 ---
