@@ -95,8 +95,8 @@
     },
     {
       "path": "data/bootstrap.json",
-      "bytes": 156645,
-      "sha256": "ec56d824b989d5385052f0a78aee6ae6560b37f9a1bd9a5d13c6888cd7177b91"
+      "bytes": 156639,
+      "sha256": "669e1ddec6f7e68c9685990cd87736f2b3fe71a74ecf5d81e6611c5bee21073b"
     },
     {
       "path": "index.html",
