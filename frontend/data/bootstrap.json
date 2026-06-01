@@ -3,7 +3,7 @@
     "mode": "nevada-official-demo",
     "notice": "Nevada-first static demo generated from official USAspending API slices and U.S. Census TIGERweb boundaries. Review amounts are source amounts, not allegations.",
     "fiscalYear": "FY 2026",
-    "generatedAt": "2026-05-30T11:46:18.921Z",
+    "generatedAt": "2026-06-01T16:27:09.904Z",
     "sources": [
       "https://api.usaspending.gov/docs/",
       "https://api.usaspending.gov/api/v2/search/spending_by_category/county/",
@@ -16,8 +16,8 @@
   "summary": {
     "totalPackages": 42,
     "totalPriorityPackages": 42,
-    "totalPotentialWaste": 14365803329.73,
-    "totalBudget": 14365803329.73,
+    "totalPotentialWaste": 14366426991.75,
+    "totalBudget": 14366426991.75,
     "unmappedPackages": 0,
     "multiLocationPackages": 1
   },
@@ -2246,8 +2246,8 @@
       "totalPackages": 1,
       "totalPriorityPackages": 1,
       "totalFlaggedPackages": 1,
-      "totalPotentialWaste": 9539832472.74,
-      "totalBudget": 9539832472.74,
+      "totalPotentialWaste": 9540285890.05,
+      "totalBudget": 9540285890.05,
       "avgRiskScore": 4,
       "maxRiskScore": 4,
       "ownerMix": {
@@ -2260,8 +2260,8 @@
         "central": {
           "totalPackages": 1,
           "totalPriorityPackages": 1,
-          "totalPotentialWaste": 9539832472.74,
-          "totalBudget": 9539832472.74
+          "totalPotentialWaste": 9540285890.05,
+          "totalBudget": 9540285890.05
         },
         "provinsi": {
           "totalPackages": 0,
@@ -2301,8 +2301,8 @@
       "totalPackages": 1,
       "totalPriorityPackages": 1,
       "totalFlaggedPackages": 1,
-      "totalPotentialWaste": 2686426506.99,
-      "totalBudget": 2686426506.99,
+      "totalPotentialWaste": 2686586058.08,
+      "totalBudget": 2686586058.08,
       "avgRiskScore": 3,
       "maxRiskScore": 3,
       "ownerMix": {
@@ -2315,8 +2315,8 @@
         "central": {
           "totalPackages": 1,
           "totalPriorityPackages": 1,
-          "totalPotentialWaste": 2686426506.99,
-          "totalBudget": 2686426506.99
+          "totalPotentialWaste": 2686586058.08,
+          "totalBudget": 2686586058.08
         },
         "provinsi": {
           "totalPackages": 0,
@@ -2851,8 +2851,8 @@
       "totalPackages": 1,
       "totalPriorityPackages": 1,
       "totalFlaggedPackages": 1,
-      "totalPotentialWaste": 35743244.81,
-      "totalBudget": 35743244.81,
+      "totalPotentialWaste": 35753938.43,
+      "totalBudget": 35753938.43,
       "avgRiskScore": 1,
       "maxRiskScore": 1,
       "ownerMix": {
@@ -2865,8 +2865,8 @@
         "central": {
           "totalPackages": 1,
           "totalPriorityPackages": 1,
-          "totalPotentialWaste": 35743244.81,
-          "totalBudget": 35743244.81
+          "totalPotentialWaste": 35753938.43,
+          "totalBudget": 35753938.43
         },
         "provinsi": {
           "totalPackages": 0,
@@ -3181,8 +3181,8 @@
       "totalPackages": 1,
       "totalPriorityPackages": 1,
       "totalFlaggedPackages": 1,
-      "totalPotentialWaste": 379115938.17,
-      "totalBudget": 379115938.17,
+      "totalPotentialWaste": 379454179.02,
+      "totalBudget": 379454179.02,
       "avgRiskScore": 2,
       "maxRiskScore": 2,
       "ownerMix": {
@@ -3195,8 +3195,8 @@
         "central": {
           "totalPackages": 1,
           "totalPriorityPackages": 1,
-          "totalPotentialWaste": 379115938.17,
-          "totalBudget": 379115938.17
+          "totalPotentialWaste": 379454179.02,
+          "totalBudget": 379454179.02
         },
         "provinsi": {
           "totalPackages": 0,
@@ -3236,8 +3236,8 @@
       "totalPackages": 1,
       "totalPriorityPackages": 1,
       "totalFlaggedPackages": 1,
-      "totalPotentialWaste": 4380328567.93,
-      "totalBudget": 4380328567.93,
+      "totalPotentialWaste": 4380498812.64,
+      "totalBudget": 4380498812.64,
       "avgRiskScore": 3,
       "maxRiskScore": 3,
       "ownerMix": {
@@ -3250,8 +3250,8 @@
         "central": {
           "totalPackages": 1,
           "totalPriorityPackages": 1,
-          "totalPotentialWaste": 4380328567.93,
-          "totalBudget": 4380328567.93
+          "totalPotentialWaste": 4380498812.64,
+          "totalBudget": 4380498812.64
         },
         "provinsi": {
           "totalPackages": 0,
@@ -3346,8 +3346,8 @@
       "totalPackages": 1,
       "totalPriorityPackages": 1,
       "totalFlaggedPackages": 1,
-      "totalPotentialWaste": 644289008.76,
-      "totalBudget": 644289008.76,
+      "totalPotentialWaste": 644404185.22,
+      "totalBudget": 644404185.22,
       "avgRiskScore": 3,
       "maxRiskScore": 3,
       "ownerMix": {
@@ -3360,8 +3360,8 @@
         "central": {
           "totalPackages": 1,
           "totalPriorityPackages": 1,
-          "totalPotentialWaste": 644289008.76,
-          "totalBudget": 644289008.76
+          "totalPotentialWaste": 644404185.22,
+          "totalBudget": 644404185.22
         },
         "provinsi": {
           "totalPackages": 0,
@@ -3455,7 +3455,7 @@
           "key": "band-1",
           "color": "#d4af37",
           "min": 1,
-          "max": 14365803329.73
+          "max": 14366426991.75
         }
       ]
     },
@@ -3604,8 +3604,8 @@
         "totalPackages": 42,
         "totalPriorityPackages": 42,
         "totalFlaggedPackages": 0,
-        "totalPotentialWaste": 14365803329.73,
-        "totalBudget": 14365803329.73,
+        "totalPotentialWaste": 14366426991.75,
+        "totalBudget": 14366426991.75,
         "avgRiskScore": 2.4,
         "maxRiskScore": 4,
         "ownerMix": {
@@ -3618,8 +3618,8 @@
           "central": {
             "totalPackages": 42,
             "totalPriorityPackages": 42,
-            "totalPotentialWaste": 14365803329.73,
-            "totalBudget": 14365803329.73
+            "totalPotentialWaste": 14366426991.75,
+            "totalBudget": 14366426991.75
           },
           "provinsi": {
             "totalPackages": 0,
@@ -3652,10 +3652,10 @@
           "source": "checkbook.nv.gov",
           "apiBase": "https://nevada-prod.spending.socrata.com",
           "fiscalYear": "2025",
-          "totalAmount": 30960795067.85,
-          "totalTransactions": 2492667,
+          "totalAmount": 30960795315.15,
+          "totalTransactions": 2492668,
           "agencyCount": 15,
-          "lastUpdated": "2026-05-30T11:46:22.680Z",
+          "lastUpdated": "2026-06-01T16:27:26.418Z",
           "topAgencies": [
             {
               "name": "Health Care Financing & Policy",
@@ -3687,7 +3687,7 @@
             },
             {
               "name": "Public AND Behavioral Health",
-              "amount": 586762710
+              "amount": 586762957
             },
             {
               "name": "Aging AND Disability Services",
@@ -3815,8 +3815,8 @@
               "packageName": "Public AND Behavioral Health",
               "owner": "State of Nevada",
               "office": "Nevada State Controller's Office",
-              "budget": 586762710,
-              "totalPotentialWaste": 1760288,
+              "budget": 586762957,
+              "totalPotentialWaste": 1760289,
               "riskScore": 2,
               "severity": "Medium",
               "isPriority": true,
@@ -4052,7 +4052,7 @@
       "ownerType": "central",
       "satker": "Place-of-performance county",
       "locationRaw": "Clark County, Nevada",
-      "budget": 9539832472.74,
+      "budget": 9540285890.05,
       "fundingSource": "Federal obligations",
       "procurementType": "Official aggregate",
       "procurementMethod": "USAspending category endpoint",
@@ -4060,7 +4060,7 @@
       "audit": {
         "schemaVersion": "usas_category_fy2026_nv",
         "severity": "absurd",
-        "potensiPemborosan": 9539832472.74,
+        "potensiPemborosan": 9540285890.05,
         "reason": "Official USAspending FY2026 place-of-performance aggregate for Clark County. Amount is a source review amount and is not a waste finding.",
         "flags": {
           "isMencurigakan": false,
@@ -4089,7 +4089,7 @@
       "ownerType": "central",
       "satker": "Place-of-performance county",
       "locationRaw": "Washoe County, Nevada",
-      "budget": 2686426506.99,
+      "budget": 2686586058.08,
       "fundingSource": "Federal obligations",
       "procurementType": "Official aggregate",
       "procurementMethod": "USAspending category endpoint",
@@ -4097,7 +4097,7 @@
       "audit": {
         "schemaVersion": "usas_category_fy2026_nv",
         "severity": "high",
-        "potensiPemborosan": 2686426506.99,
+        "potensiPemborosan": 2686586058.08,
         "reason": "Official USAspending FY2026 place-of-performance aggregate for Washoe County. Amount is a source review amount and is not a waste finding.",
         "flags": {
           "isMencurigakan": false,
@@ -4459,7 +4459,7 @@
       "ownerType": "central",
       "satker": "Place-of-performance county",
       "locationRaw": "White Pine County, Nevada",
-      "budget": 35743244.81,
+      "budget": 35753938.43,
       "fundingSource": "Federal obligations",
       "procurementType": "Official aggregate",
       "procurementMethod": "USAspending category endpoint",
@@ -4467,7 +4467,7 @@
       "audit": {
         "schemaVersion": "usas_category_fy2026_nv",
         "severity": "low",
-        "potensiPemborosan": 35743244.81,
+        "potensiPemborosan": 35753938.43,
         "reason": "Official USAspending FY2026 place-of-performance aggregate for White Pine County. Amount is a source review amount and is not a waste finding.",
         "flags": {
           "isMencurigakan": false,
@@ -4681,7 +4681,7 @@
       "ownerType": "central",
       "satker": "Place-of-performance congressional district",
       "locationRaw": "Nevada Congressional District 1, Nevada",
-      "budget": 379115938.17,
+      "budget": 379454179.02,
       "fundingSource": "Federal obligations",
       "procurementType": "Official aggregate",
       "procurementMethod": "USAspending category endpoint",
@@ -4689,7 +4689,7 @@
       "audit": {
         "schemaVersion": "usas_category_fy2026_nv",
         "severity": "med",
-        "potensiPemborosan": 379115938.17,
+        "potensiPemborosan": 379454179.02,
         "reason": "Official USAspending FY2026 place-of-performance aggregate for Nevada Congressional District 1. Amount is a source review amount and is not a waste finding.",
         "flags": {
           "isMencurigakan": false,
@@ -4718,7 +4718,7 @@
       "ownerType": "central",
       "satker": "Place-of-performance congressional district",
       "locationRaw": "Nevada Congressional District 2, Nevada",
-      "budget": 4380328567.93,
+      "budget": 4380498812.64,
       "fundingSource": "Federal obligations",
       "procurementType": "Official aggregate",
       "procurementMethod": "USAspending category endpoint",
@@ -4726,7 +4726,7 @@
       "audit": {
         "schemaVersion": "usas_category_fy2026_nv",
         "severity": "high",
-        "potensiPemborosan": 4380328567.93,
+        "potensiPemborosan": 4380498812.64,
         "reason": "Official USAspending FY2026 place-of-performance aggregate for Nevada Congressional District 2. Amount is a source review amount and is not a waste finding.",
         "flags": {
           "isMencurigakan": false,
@@ -4792,7 +4792,7 @@
       "ownerType": "central",
       "satker": "Place-of-performance congressional district",
       "locationRaw": "Nevada Congressional District 4, Nevada",
-      "budget": 644289008.76,
+      "budget": 644404185.22,
       "fundingSource": "Federal obligations",
       "procurementType": "Official aggregate",
       "procurementMethod": "USAspending category endpoint",
@@ -4800,7 +4800,7 @@
       "audit": {
         "schemaVersion": "usas_category_fy2026_nv",
         "severity": "high",
-        "potensiPemborosan": 644289008.76,
+        "potensiPemborosan": 644404185.22,
         "reason": "Official USAspending FY2026 place-of-performance aggregate for Nevada Congressional District 4. Amount is a source review amount and is not a waste finding.",
         "flags": {
           "isMencurigakan": false,
