@@ -3,7 +3,7 @@
     "mode": "nevada-official-demo",
     "notice": "Nevada-first static demo generated from official USAspending API slices and U.S. Census TIGERweb boundaries. Review amounts are source amounts, not allegations.",
     "fiscalYear": "FY 2026",
-    "generatedAt": "2026-06-08T14:37:31.581Z",
+    "generatedAt": "2026-06-09T13:18:28.426Z",
     "sources": [
       "https://api.usaspending.gov/docs/",
       "https://api.usaspending.gov/api/v2/search/spending_by_category/county/",
@@ -16,8 +16,8 @@
   "summary": {
     "totalPackages": 42,
     "totalPriorityPackages": 42,
-    "totalPotentialWaste": 14571307824.4,
-    "totalBudget": 14571307824.4,
+    "totalPotentialWaste": 14579025183.48,
+    "totalBudget": 14579025183.48,
     "unmappedPackages": 0,
     "multiLocationPackages": 1
   },
@@ -2246,8 +2246,8 @@
       "totalPackages": 1,
       "totalPriorityPackages": 1,
       "totalFlaggedPackages": 1,
-      "totalPotentialWaste": 9660550613.03,
-      "totalBudget": 9660550613.03,
+      "totalPotentialWaste": 9665561670.04,
+      "totalBudget": 9665561670.04,
       "avgRiskScore": 4,
       "maxRiskScore": 4,
       "ownerMix": {
@@ -2260,8 +2260,8 @@
         "central": {
           "totalPackages": 1,
           "totalPriorityPackages": 1,
-          "totalPotentialWaste": 9660550613.03,
-          "totalBudget": 9660550613.03
+          "totalPotentialWaste": 9665561670.04,
+          "totalBudget": 9665561670.04
         },
         "provinsi": {
           "totalPackages": 0,
@@ -2301,8 +2301,8 @@
       "totalPackages": 1,
       "totalPriorityPackages": 1,
       "totalFlaggedPackages": 1,
-      "totalPotentialWaste": 2713115094.79,
-      "totalBudget": 2713115094.79,
+      "totalPotentialWaste": 2714876900.94,
+      "totalBudget": 2714876900.94,
       "avgRiskScore": 3,
       "maxRiskScore": 3,
       "ownerMix": {
@@ -2315,8 +2315,8 @@
         "central": {
           "totalPackages": 1,
           "totalPriorityPackages": 1,
-          "totalPotentialWaste": 2713115094.79,
-          "totalBudget": 2713115094.79
+          "totalPotentialWaste": 2714876900.94,
+          "totalBudget": 2714876900.94
         },
         "provinsi": {
           "totalPackages": 0,
@@ -2356,8 +2356,8 @@
       "totalPackages": 1,
       "totalPriorityPackages": 1,
       "totalFlaggedPackages": 1,
-      "totalPotentialWaste": 536308465.72,
-      "totalBudget": 536308465.72,
+      "totalPotentialWaste": 536312371.07,
+      "totalBudget": 536312371.07,
       "avgRiskScore": 3,
       "maxRiskScore": 3,
       "ownerMix": {
@@ -2370,8 +2370,8 @@
         "central": {
           "totalPackages": 1,
           "totalPriorityPackages": 1,
-          "totalPotentialWaste": 536308465.72,
-          "totalBudget": 536308465.72
+          "totalPotentialWaste": 536312371.07,
+          "totalBudget": 536312371.07
         },
         "provinsi": {
           "totalPackages": 0,
@@ -2576,8 +2576,8 @@
       "totalPackages": 1,
       "totalPriorityPackages": 1,
       "totalFlaggedPackages": 1,
-      "totalPotentialWaste": 257537883.74,
-      "totalBudget": 257537883.74,
+      "totalPotentialWaste": 258482474.31,
+      "totalBudget": 258482474.31,
       "avgRiskScore": 2,
       "maxRiskScore": 2,
       "ownerMix": {
@@ -2590,8 +2590,8 @@
         "central": {
           "totalPackages": 1,
           "totalPriorityPackages": 1,
-          "totalPotentialWaste": 257537883.74,
-          "totalBudget": 257537883.74
+          "totalPotentialWaste": 258482474.31,
+          "totalBudget": 258482474.31
         },
         "provinsi": {
           "totalPackages": 0,
@@ -3016,8 +3016,8 @@
       "totalPackages": 1,
       "totalPriorityPackages": 1,
       "totalFlaggedPackages": 1,
-      "totalPotentialWaste": 17481670.42,
-      "totalBudget": 17481670.42,
+      "totalPotentialWaste": 17477670.42,
+      "totalBudget": 17477670.42,
       "avgRiskScore": 1,
       "maxRiskScore": 1,
       "ownerMix": {
@@ -3030,8 +3030,8 @@
         "central": {
           "totalPackages": 1,
           "totalPriorityPackages": 1,
-          "totalPotentialWaste": 17481670.42,
-          "totalBudget": 17481670.42
+          "totalPotentialWaste": 17477670.42,
+          "totalBudget": 17477670.42
         },
         "provinsi": {
           "totalPackages": 0,
@@ -3181,8 +3181,8 @@
       "totalPackages": 1,
       "totalPriorityPackages": 1,
       "totalFlaggedPackages": 1,
-      "totalPotentialWaste": 389406312.67,
-      "totalBudget": 389406312.67,
+      "totalPotentialWaste": 389557477.58,
+      "totalBudget": 389557477.58,
       "avgRiskScore": 2,
       "maxRiskScore": 2,
       "ownerMix": {
@@ -3195,8 +3195,8 @@
         "central": {
           "totalPackages": 1,
           "totalPriorityPackages": 1,
-          "totalPotentialWaste": 389406312.67,
-          "totalBudget": 389406312.67
+          "totalPotentialWaste": 389557477.58,
+          "totalBudget": 389557477.58
         },
         "provinsi": {
           "totalPackages": 0,
@@ -3236,8 +3236,8 @@
       "totalPackages": 1,
       "totalPriorityPackages": 1,
       "totalFlaggedPackages": 1,
-      "totalPotentialWaste": 4462816802.86,
-      "totalBudget": 4462816802.86,
+      "totalPotentialWaste": 4465523104.93,
+      "totalBudget": 4465523104.93,
       "avgRiskScore": 3,
       "maxRiskScore": 3,
       "ownerMix": {
@@ -3250,8 +3250,8 @@
         "central": {
           "totalPackages": 1,
           "totalPriorityPackages": 1,
-          "totalPotentialWaste": 4462816802.86,
-          "totalBudget": 4462816802.86
+          "totalPotentialWaste": 4465523104.93,
+          "totalBudget": 4465523104.93
         },
         "provinsi": {
           "totalPackages": 0,
@@ -3291,8 +3291,8 @@
       "totalPackages": 1,
       "totalPriorityPackages": 1,
       "totalFlaggedPackages": 1,
-      "totalPotentialWaste": 1318369724.01,
-      "totalBudget": 1318369724.01,
+      "totalPotentialWaste": 1318531206.01,
+      "totalBudget": 1318531206.01,
       "avgRiskScore": 3,
       "maxRiskScore": 3,
       "ownerMix": {
@@ -3305,8 +3305,8 @@
         "central": {
           "totalPackages": 1,
           "totalPriorityPackages": 1,
-          "totalPotentialWaste": 1318369724.01,
-          "totalBudget": 1318369724.01
+          "totalPotentialWaste": 1318531206.01,
+          "totalBudget": 1318531206.01
         },
         "provinsi": {
           "totalPackages": 0,
@@ -3346,8 +3346,8 @@
       "totalPackages": 1,
       "totalPriorityPackages": 1,
       "totalFlaggedPackages": 1,
-      "totalPotentialWaste": 661931229.8,
-      "totalBudget": 661931229.8,
+      "totalPotentialWaste": 666629639.9,
+      "totalBudget": 666629639.9,
       "avgRiskScore": 3,
       "maxRiskScore": 3,
       "ownerMix": {
@@ -3360,8 +3360,8 @@
         "central": {
           "totalPackages": 1,
           "totalPriorityPackages": 1,
-          "totalPotentialWaste": 661931229.8,
-          "totalBudget": 661931229.8
+          "totalPotentialWaste": 666629639.9,
+          "totalBudget": 666629639.9
         },
         "provinsi": {
           "totalPackages": 0,
@@ -3455,7 +3455,7 @@
           "key": "band-1",
           "color": "#d4af37",
           "min": 1,
-          "max": 14571307824.4
+          "max": 14579025183.48
         }
       ]
     },
@@ -3604,8 +3604,8 @@
         "totalPackages": 42,
         "totalPriorityPackages": 42,
         "totalFlaggedPackages": 0,
-        "totalPotentialWaste": 14571307824.4,
-        "totalBudget": 14571307824.4,
+        "totalPotentialWaste": 14579025183.48,
+        "totalBudget": 14579025183.48,
         "avgRiskScore": 2.4,
         "maxRiskScore": 4,
         "ownerMix": {
@@ -3618,8 +3618,8 @@
           "central": {
             "totalPackages": 42,
             "totalPriorityPackages": 42,
-            "totalPotentialWaste": 14571307824.4,
-            "totalBudget": 14571307824.4
+            "totalPotentialWaste": 14579025183.48,
+            "totalBudget": 14579025183.48
           },
           "provinsi": {
             "totalPackages": 0,
@@ -3655,7 +3655,7 @@
           "totalAmount": 30960795315.15,
           "totalTransactions": 2492676,
           "agencyCount": 15,
-          "lastUpdated": "2026-06-08T14:37:51.363Z",
+          "lastUpdated": "2026-06-09T13:18:56.643Z",
           "topAgencies": [
             {
               "name": "Health Care Financing & Policy",
@@ -3957,8 +3957,8 @@
         "totalPackages": 5,
         "totalPriorityPackages": 5,
         "totalFlaggedPackages": 0,
-        "totalPotentialWaste": 4232803021.52,
-        "totalBudget": 4232803021.52,
+        "totalPotentialWaste": 4233497379.55,
+        "totalBudget": 4233497379.55,
         "severityCounts": {
           "low": 0,
           "med": 3,
@@ -4052,7 +4052,7 @@
       "ownerType": "central",
       "satker": "Place-of-performance county",
       "locationRaw": "Clark County, Nevada",
-      "budget": 9660550613.03,
+      "budget": 9665561670.04,
       "fundingSource": "Federal obligations",
       "procurementType": "Official aggregate",
       "procurementMethod": "USAspending category endpoint",
@@ -4060,7 +4060,7 @@
       "audit": {
         "schemaVersion": "usas_category_fy2026_nv",
         "severity": "absurd",
-        "potensiPemborosan": 9660550613.03,
+        "potensiPemborosan": 9665561670.04,
         "reason": "Official USAspending FY2026 place-of-performance aggregate for Clark County. Amount is a source review amount and is not a waste finding.",
         "flags": {
           "isMencurigakan": false,
@@ -4089,7 +4089,7 @@
       "ownerType": "central",
       "satker": "Place-of-performance county",
       "locationRaw": "Washoe County, Nevada",
-      "budget": 2713115094.79,
+      "budget": 2714876900.94,
       "fundingSource": "Federal obligations",
       "procurementType": "Official aggregate",
       "procurementMethod": "USAspending category endpoint",
@@ -4097,7 +4097,7 @@
       "audit": {
         "schemaVersion": "usas_category_fy2026_nv",
         "severity": "high",
-        "potensiPemborosan": 2713115094.79,
+        "potensiPemborosan": 2714876900.94,
         "reason": "Official USAspending FY2026 place-of-performance aggregate for Washoe County. Amount is a source review amount and is not a waste finding.",
         "flags": {
           "isMencurigakan": false,
@@ -4126,7 +4126,7 @@
       "ownerType": "central",
       "satker": "Place-of-performance county",
       "locationRaw": "Carson City, Nevada",
-      "budget": 536308465.72,
+      "budget": 536312371.07,
       "fundingSource": "Federal obligations",
       "procurementType": "Official aggregate",
       "procurementMethod": "USAspending category endpoint",
@@ -4134,7 +4134,7 @@
       "audit": {
         "schemaVersion": "usas_category_fy2026_nv",
         "severity": "high",
-        "potensiPemborosan": 536308465.72,
+        "potensiPemborosan": 536312371.07,
         "reason": "Official USAspending FY2026 place-of-performance aggregate for Carson City. Amount is a source review amount and is not a waste finding.",
         "flags": {
           "isMencurigakan": false,
@@ -4274,7 +4274,7 @@
       "ownerType": "central",
       "satker": "Place-of-performance county",
       "locationRaw": "Churchill County, Nevada",
-      "budget": 257537883.74,
+      "budget": 258482474.31,
       "fundingSource": "Federal obligations",
       "procurementType": "Official aggregate",
       "procurementMethod": "USAspending category endpoint",
@@ -4282,7 +4282,7 @@
       "audit": {
         "schemaVersion": "usas_category_fy2026_nv",
         "severity": "med",
-        "potensiPemborosan": 257537883.74,
+        "potensiPemborosan": 258482474.31,
         "reason": "Official USAspending FY2026 place-of-performance aggregate for Churchill County. Amount is a source review amount and is not a waste finding.",
         "flags": {
           "isMencurigakan": false,
@@ -4570,7 +4570,7 @@
       "ownerType": "central",
       "satker": "Place-of-performance county",
       "locationRaw": "Pershing County, Nevada",
-      "budget": 17481670.42,
+      "budget": 17477670.42,
       "fundingSource": "Federal obligations",
       "procurementType": "Official aggregate",
       "procurementMethod": "USAspending category endpoint",
@@ -4578,7 +4578,7 @@
       "audit": {
         "schemaVersion": "usas_category_fy2026_nv",
         "severity": "low",
-        "potensiPemborosan": 17481670.42,
+        "potensiPemborosan": 17477670.42,
         "reason": "Official USAspending FY2026 place-of-performance aggregate for Pershing County. Amount is a source review amount and is not a waste finding.",
         "flags": {
           "isMencurigakan": false,
@@ -4681,7 +4681,7 @@
       "ownerType": "central",
       "satker": "Place-of-performance congressional district",
       "locationRaw": "Nevada Congressional District 1, Nevada",
-      "budget": 389406312.67,
+      "budget": 389557477.58,
       "fundingSource": "Federal obligations",
       "procurementType": "Official aggregate",
       "procurementMethod": "USAspending category endpoint",
@@ -4689,7 +4689,7 @@
       "audit": {
         "schemaVersion": "usas_category_fy2026_nv",
         "severity": "med",
-        "potensiPemborosan": 389406312.67,
+        "potensiPemborosan": 389557477.58,
         "reason": "Official USAspending FY2026 place-of-performance aggregate for Nevada Congressional District 1. Amount is a source review amount and is not a waste finding.",
         "flags": {
           "isMencurigakan": false,
@@ -4718,7 +4718,7 @@
       "ownerType": "central",
       "satker": "Place-of-performance congressional district",
       "locationRaw": "Nevada Congressional District 2, Nevada",
-      "budget": 4462816802.86,
+      "budget": 4465523104.93,
       "fundingSource": "Federal obligations",
       "procurementType": "Official aggregate",
       "procurementMethod": "USAspending category endpoint",
@@ -4726,7 +4726,7 @@
       "audit": {
         "schemaVersion": "usas_category_fy2026_nv",
         "severity": "high",
-        "potensiPemborosan": 4462816802.86,
+        "potensiPemborosan": 4465523104.93,
         "reason": "Official USAspending FY2026 place-of-performance aggregate for Nevada Congressional District 2. Amount is a source review amount and is not a waste finding.",
         "flags": {
           "isMencurigakan": false,
@@ -4755,7 +4755,7 @@
       "ownerType": "central",
       "satker": "Place-of-performance congressional district",
       "locationRaw": "Nevada Congressional District 3, Nevada",
-      "budget": 1318369724.01,
+      "budget": 1318531206.01,
       "fundingSource": "Federal obligations",
       "procurementType": "Official aggregate",
       "procurementMethod": "USAspending category endpoint",
@@ -4763,7 +4763,7 @@
       "audit": {
         "schemaVersion": "usas_category_fy2026_nv",
         "severity": "high",
-        "potensiPemborosan": 1318369724.01,
+        "potensiPemborosan": 1318531206.01,
         "reason": "Official USAspending FY2026 place-of-performance aggregate for Nevada Congressional District 3. Amount is a source review amount and is not a waste finding.",
         "flags": {
           "isMencurigakan": false,
@@ -4792,7 +4792,7 @@
       "ownerType": "central",
       "satker": "Place-of-performance congressional district",
       "locationRaw": "Nevada Congressional District 4, Nevada",
-      "budget": 661931229.8,
+      "budget": 666629639.9,
       "fundingSource": "Federal obligations",
       "procurementType": "Official aggregate",
       "procurementMethod": "USAspending category endpoint",
@@ -4800,7 +4800,7 @@
       "audit": {
         "schemaVersion": "usas_category_fy2026_nv",
         "severity": "high",
-        "potensiPemborosan": 661931229.8,
+        "potensiPemborosan": 666629639.9,
         "reason": "Official USAspending FY2026 place-of-performance aggregate for Nevada Congressional District 4. Amount is a source review amount and is not a waste finding.",
         "flags": {
           "isMencurigakan": false,
@@ -4940,7 +4940,7 @@
       "ownerType": "central",
       "satker": "Department of the Navy | HII MISSION TECHNOLOGIES CORP",
       "locationRaw": "Nevada statewide or source-level place of performance",
-      "budget": 830487272.1,
+      "budget": 831181630.13,
       "fundingSource": "Federal award",
       "procurementType": "Contract award",
       "procurementMethod": "USAspending award search",
@@ -4948,7 +4948,7 @@
       "audit": {
         "schemaVersion": "usas_award_fy2026_nv",
         "severity": "high",
-        "potensiPemborosan": 830487272.1,
+        "potensiPemborosan": 831181630.13,
         "reason": "Official USAspending award row. Recipient: HII MISSION TECHNOLOGIES CORP. Period: 2020-08-12 to 2026-08-11. Review tier is amount-volume only and is not an allegation.",
         "flags": {
           "isMencurigakan": false,
